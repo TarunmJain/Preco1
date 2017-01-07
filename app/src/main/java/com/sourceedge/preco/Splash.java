@@ -41,4 +41,5 @@ public class Splash extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
