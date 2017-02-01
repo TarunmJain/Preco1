@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_location"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sourceedge.preco.location.controller.Locations"
+    tools:showIn="@layout/activity_location">
+    <fragment
+        android:layout_above="@+id/locationslist"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NEXT"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"
+        android:padding="@dimen/dimen_10"
+        android:layout_alignParentBottom="true"/>
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/upperlayout"
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/footer"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/next"
+            android:layout_toEndOf="@+id/next">
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/scrollup"
+                android:text="View All"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:padding="@dimen/dimen_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:paddingTop="@dimen/dimen_10"
+        android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@drawable/scrollbarui"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="5dp"
+        android:paddingLeft="@dimen/dimen_10"
+        android:paddingRight="@dimen/dimen_10"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:id="@+id/locationslist"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
+
+</RelativeLayout>

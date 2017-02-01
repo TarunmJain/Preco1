@@ -1,4 +1,73 @@
 <resources>
     <string name="app_name">Preco</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Login</string>
+    <string name="app_id">107454943095262</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="login_title">Preco</string>
+    <string name="login_button_title">LOGIN</string>
+    <string name="new_user_registration">New User? </string>
+    <string name="SignUp">  Sign Up</string>
+    <string name="title_activity_new_register">New Register</string>
+    <string name="title_emailid">Email Id</string>
+    <string name="title_password">Password</string>
+    <string name="title_confirm_password">Confirm Password</string>
+    <string name="title_phoneno">Phone No</string>
+    <string name="register_now_button_title">REGISTER NOW</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_print">Print</string>
+    <string name="title_copy_scan">Copy / Scan</string>
+    <string name="title_book_xerox">Book Photo Copy</string>
+    <string name="title_no_slots"><u>1</u></string>
+
+    <string name="title_myprofile_name">Name*</string>
+    <string name="title_myprofile_emailid">Email ID*</string>
+    <string name="title_myprofile_password">Password*</string>
+    <string name="title_myprofile_age">Age</string>
+    <string name="title_myprofile_gender">Gender</string>
+    <string name="title_myprofile_phoneno">Phone Number*</string>
+    <string name="title_myprofile_dept">Department</string>
+    <string name="title_myprofile_year">Year</string>
+    <string name="title_myprofile_button_save">SAVE</string>
+
+
+    <string name="title_points">Points</string>
+    <string name="title_add_points">Add Points</string>
+    <string name="title_history">History</string>
+    <string name="title_promotion">Promotion</string>
+    <string name="title_notification">Notification</string>
+    <string name="title_pricing_info">Pricing Info</string>
+    <string name="title_profile">My Profile</string>
+    <string name="title_faqs">FAQs</string>
+    <string name="title_helps_support">Helps / Support</string>
+    <string name="title_logout">Logout</string>
+    <string name="title_mobile_verification">Mobile Verification</string>
+    <string name="title_enter_code">Enter Code</string>
+    <string name="submit_button_title">Submit</string>
+
+    <string name="opendrawer">open</string>
+    <string name="closedrawer">close</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="title_activity_mobile_verification">MobileVerification</string>
+    <string name="title_activity_my_profile">MyProfile</string>
+    <string name="title_activity_location">Location</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_upload_file">UploadFile</string>
+    <string name="title_activity_print_properties">PrintProperties</string>
+    <string name="title_activity_slot_selection">SlotSelection</string>
+    <string name="title_activity_payments">Payments</string>
+    <string name="title_activity_summary">Summary</string>
+    <string name="title_activity_book_photo_copy">BookPhotoCopy</string>
+    <string name="title_activity_book_properties">BookProperties</string>
+    <string name="title_activity_viewer">Viewer</string>
+    <string name="title_activity_pdf_viewer">PdfViewer</string>
+    <string name="title_activity_add_preco_points">AddPrecoPoints</string>
+    <string name="title_activity_pricing_info">PricingInfo</string>
+    <string name="title_activity_history">History</string>
+
 </resources>

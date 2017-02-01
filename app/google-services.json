@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "241914864311",
+    "project_id": "preco-b98d3"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241914864311:android:1b01a99a673e7a80",
+        "android_client_info": {
+          "package_name": "com.sourceedge.preco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241914864311-3iehligkafof8qu449rkgs22lde0jl23.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sourceedge.preco",
+            "certificate_hash": "EEB8382F589C06A2D58265ACE824CFC70DDBB5F9"
+          }
+        },
+        {
+          "client_id": "241914864311-ebnb6bl9v27q2ll3rmrdalvc48mqf38i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANA5SC0emOqGu6M2DwMVTJZRBnGJs7g_g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

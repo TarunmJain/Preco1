@@ -1,0 +1,108 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:elevation="24dp"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/maintext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Copy / Scan"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:paddingTop="15dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp" />
+        <TextView
+            android:id="@+id/subtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Approximate number of pages to be scanned / copies :"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_10">
+
+            <ImageView
+                android:id="@+id/decrement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_minus_grey600_24dp"
+                android:background="@drawable/transparent_square_box"/>
+            <EditText
+                android:id="@+id/copies_scan"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:layout_marginRight="@dimen/dimen_5"
+                android:padding="@dimen/dimen_10"
+                android:background="@drawable/transparent_square_box"
+                android:textSize="@dimen/textview_14"/>
+            <ImageView
+                android:id="@+id/increment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_plus_grey600_24dp"
+                android:background="@drawable/transparent_square_box"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="right">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="CANCEL"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@android:color/transparent"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:id="@+id/cancel_button"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="NEXT"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@android:color/transparent"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:id="@+id/next_button"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

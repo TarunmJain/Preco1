@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardBackgroundColor="@color/colorWhite"
+            card_view:cardCornerRadius="@dimen/dimen_5"
+            card_view:cardElevation="@dimen/dimen_2"
+            card_view:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dimen_5">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="File Name"
+                    android:textColor="@color/colorBlack"
+                    android:padding="@dimen/dimen_5"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Date : 12-02-2017"
+                    android:textColor="@color/colorBlack"
+                    android:padding="@dimen/dimen_5"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Time : 13:50"
+                    android:textColor="@color/colorBlack"
+                    android:padding="@dimen/dimen_5"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Service : A4,color,double side"
+                    android:textColor="@color/colorBlack"
+                    android:padding="@dimen/dimen_5"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Amount : 20 points"
+                    android:textColor="@color/colorBlack"
+                    android:padding="@dimen/dimen_5"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Machine Id : KR-200"
+                    android:textColor="@color/colorBlack"
+                    android:padding="@dimen/dimen_5"/>
+            </LinearLayout>
+            </android.support.v7.widget.CardView>
+    </LinearLayout>
+</FrameLayout>

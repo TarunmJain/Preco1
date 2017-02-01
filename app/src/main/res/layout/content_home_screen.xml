@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_home_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sourceedge.preco.homescreen.controller.HomeScreen"
+    tools:showIn="@layout/activity_home_screen">
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <TextView
+            android:id="@+id/print"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/title_print"
+            android:textSize="@dimen/textview_18"
+            android:textColor="@color/colorBlack"
+            android:padding="@dimen/dimen_10"
+            android:gravity="center"
+            android:background="@drawable/transparent_square_box"/>
+        <TextView
+            android:id="@+id/copy_scan"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/title_copy_scan"
+            android:textSize="@dimen/textview_18"
+            android:padding="@dimen/dimen_10"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:background="@drawable/transparent_square_box"/>
+        <TextView
+            android:id="@+id/book_xerox"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/title_book_xerox"
+            android:textSize="@dimen/textview_18"
+            android:padding="@dimen/dimen_10"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:background="@drawable/transparent_square_box"/>
+    </LinearLayout>-->
+    <LinearLayout
+        android:padding="@dimen/dimen_10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:padding="@dimen/dimen_5"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_above="@+id/printtext"
+                    android:id="@+id/print"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dimen_10"
+                    android:src="@drawable/print" />
+
+                <TextView
+                    android:padding="@dimen/dimen_5"
+                    android:id="@+id/printtext"
+                    android:layout_width="match_parent"
+                    android:text="Print"
+                    android:textColor="@color/colorBlack"
+
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:padding="@dimen/dimen_5"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageView
+                    android:layout_above="@+id/copytext"
+                    android:id="@+id/copy_scan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_10"
+                    android:src="@drawable/copy" />
+                <TextView
+                    android:padding="@dimen/dimen_5"
+                    android:id="@+id/copytext"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:text="Scan"
+                    android:textColor="@color/colorBlack"
+
+                    android:gravity="center"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:padding="@dimen/dimen_5"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_above="@+id/scantext"
+                    android:id="@+id/book_xerox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_10"
+                    android:src="@drawable/scan" />
+                <TextView
+                    android:padding="@dimen/dimen_5"
+                    android:id="@+id/scantext"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:text="Photo Copy"
+                    android:textColor="@color/colorBlack"
+
+                    android:gravity="center"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:padding="@dimen/dimen_5"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_above="@+id/jobstext"
+                    android:id="@+id/job"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_10"
+                    android:src="@drawable/jobs" />
+                <TextView
+                    android:padding="@dimen/dimen_5"
+                    android:id="@+id/jobstext"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:text="Jobs"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+</RelativeLayout>

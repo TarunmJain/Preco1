@@ -3,4 +3,48 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="textview_14">14sp</dimen>
+    <dimen name="textview_10">10sp</dimen>
+    <dimen name="textview_12">12sp</dimen>
+    <dimen name="textview_16">16sp</dimen>
+    <dimen name="textview_18">18sp</dimen>
+    <dimen name="textview_20">20sp</dimen>
+    <dimen name="textview_24">24sp</dimen>
+    <dimen name="dimen_1">1dp</dimen>
+    <dimen name="dimen_2">2dp</dimen>
+    <dimen name="dimen_4">4dp</dimen>
+    <dimen name="dimen_5">5dp</dimen>
+    <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_15">15dp</dimen>
+    <dimen name="dimen_16">16dp</dimen>
+    <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_24">24dp</dimen>
+    <dimen name="dimen_30">30dp</dimen>
+    <dimen name="dimen_32">32dp</dimen>
+    <dimen name="dimen_40">40dp</dimen>
+    <dimen name="dimen_50">50dp</dimen>
+    <dimen name="dimen_60">60dp</dimen>
+    <dimen name="dimen_70">70dp</dimen>
+    <dimen name="dimen_80">80dp</dimen>
+    <dimen name="dimen_90">90dp</dimen>
+    <dimen name="dimen_100">100dp</dimen>
+    <dimen name="dimen_110">110dp</dimen>
+    <dimen name="dimen_120">120dp</dimen>
+    <dimen name="dimen_130">130dp</dimen>
+    <dimen name="dimen_140">140dp</dimen>
+    <dimen name="dimen_150">150dp</dimen>
+    <dimen name="dimen_160">160dp</dimen>
+    <dimen name="dimen_170">170dp</dimen>
+    <dimen name="dimen_180">180dp</dimen>
+    <dimen name="dimen_190">190dp</dimen>
+    <dimen name="dimen_200">200dp</dimen>
+
+
+
+    <dimen name="dots_height">30dp</dimen>
+    <dimen name="dots_margin_bottom">20dp</dimen>
+    <dimen name="img_width_height">120dp</dimen>
+    <dimen name="slide_title">30dp</dimen>
+    <dimen name="slide_desc">16dp</dimen>
+    <dimen name="desc_padding">40dp</dimen>
 </resources>
