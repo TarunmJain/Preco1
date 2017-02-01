@@ -46,6 +46,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 import com.sourceedge.preco.R;
+import com.sourceedge.preco.bookphotocopy.controller.Scan;
 import com.sourceedge.preco.homescreen.controller.HomeScreen;
 import com.sourceedge.preco.location.model.ModelPrinters;
 import com.sourceedge.preco.location.view.LocationListAdapter;
@@ -119,7 +120,10 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
             public void onClick(View v) {
                 if (SelectedPrinter != null) {
                     if (Class_Static.isCopyScan) {
-                        dialog = new Dialog(Locations.this);
+
+                       // startActivity(new Intent(Locations.this, Scan.class));
+
+                       /* dialog = new Dialog(Locations.this);
                         dialog.setContentView(R.layout.dialog_copies);
                         copiesScan = (TextView) dialog.findViewById(R.id.copies_scan);
                         nextButton = (Button) dialog.findViewById(R.id.next_button);
@@ -167,7 +171,7 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
                         });
 
 
-                        dialog.show();
+                        dialog.show();*/
                     } else {
                         Class_Model_DB.SelectedPrinter = null;
                         startActivity(new Intent(Locations.this, UploadFile.class));

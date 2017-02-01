@@ -6,8 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.sourceedge.preco.bookphotocopy.controller.BookPhotoCopy"
-    tools:showIn="@layout/activity_book_photo_copy">
+    tools:context="com.sourceedge.preco.bookphotocopy.controller.Scan"
+    tools:showIn="@layout/activity_scan">
+
+
     <ScrollView
         android:layout_above="@+id/bookphotocopy_next"
         android:layout_width="match_parent"
@@ -56,41 +58,6 @@
                 android:background="@drawable/transparent_square_box"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"/>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Binding"
-                android:padding="@dimen/dimen_10"/>
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/login_member"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:padding="5dp"
-                    android:text="Yes" />
-
-                <RadioButton
-                    android:id="@+id/login_admin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="No" />
-            </RadioGroup>
-
-
-
-
-
 
         </LinearLayout>
     </ScrollView>

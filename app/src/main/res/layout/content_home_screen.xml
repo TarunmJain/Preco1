@@ -172,7 +172,7 @@
                     android:id="@+id/jobstext"
                     android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
-                    android:text="Jobs"
+                    android:text="Forms"
                     android:textColor="@color/colorBlack"
                     android:gravity="center"
                     android:layout_height="wrap_content" />
