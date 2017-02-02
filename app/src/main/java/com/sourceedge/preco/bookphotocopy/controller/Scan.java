@@ -1,4 +1,4 @@
-package com.sourceedge.preco.summary.controller;
+package com.sourceedge.preco.bookphotocopy.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,32 +9,45 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sourceedge.preco.R;
-import com.sourceedge.preco.homescreen.controller.HomeScreen;
+import com.sourceedge.preco.payment.controller.Payments;
 
-public class Summary extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class Scan extends AppCompatActivity {
     Toolbar toolbar;
-    TextView homescreen;
+    Spinner scanSingleDoubleSpinner;
+    ArrayList<String> singleDouble;
+    TextView scanConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_summary);
+        setContentView(R.layout.activity_scan);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Job Done");
+        toolbar.setTitle("Scan");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        homescreen=(TextView)findViewById(R.id.homescreen);
+        scanSingleDoubleSpinner=(Spinner)findViewById(R.id.scan_single_double_spinner);
+        scanConfirm=(TextView)findViewById(R.id.scan_confirm);
+        singleDouble=new ArrayList<String>();
+        singleDouble.add("Single");
+        singleDouble.add("Double");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, singleDouble);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        scanSingleDoubleSpinner.setAdapter(dataAdapter);
         OnClicks();
     }
 
     private void OnClicks() {
-        homescreen.setOnClickListener(new View.OnClickListener() {
+        scanConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                startActivity(new Intent(Scan.this, Payments.class));
             }
         });
     }
@@ -51,6 +64,7 @@ public class Summary extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
         if (item.getItemId() == android.R.id.home) {                //On Back Arrow pressed
             onBackPressed();
         }
@@ -60,6 +74,8 @@ public class Summary extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(Summary.this,Rating.class));
+        finish();
     }
+
+
 }

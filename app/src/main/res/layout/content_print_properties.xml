@@ -133,20 +133,24 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_5"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:background="@drawable/transparent_square_box">
-                <TextView
-                    android:layout_toLeftOf="@+id/icon3"
+                <!--<TextView
+                    android:layout_toLeftOf="@+id/icon1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Black/White"
-                    android:padding="@dimen/dimen_10"
-                    android:layout_centerInParent="true"
-                    android:gravity="center_vertical"/>
+                    android:text="A4"
+                    android:padding="@dimen/dimen_10"/>-->
+                <Spinner
+                    android:id="@+id/color_spinner"
+                    android:layout_toLeftOf="@+id/icon2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                </Spinner>
                 <ImageView
-                    android:id="@+id/icon3"
+                    android:id="@+id/icon2"
                     android:layout_width="@dimen/dimen_30"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -164,20 +168,24 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_5"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:background="@drawable/transparent_square_box">
-                <TextView
-                    android:layout_toLeftOf="@+id/icon4"
+                <!--<TextView
+                    android:layout_toLeftOf="@+id/icon1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Double side"
-                    android:padding="@dimen/dimen_10"
-                    android:layout_centerInParent="true"
-                    android:gravity="center_vertical"/>
+                    android:text="A4"
+                    android:padding="@dimen/dimen_10"/>-->
+                <Spinner
+                    android:id="@+id/single_double_spinner"
+                    android:layout_toLeftOf="@+id/icon3"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                </Spinner>
                 <ImageView
-                    android:id="@+id/icon4"
+                    android:id="@+id/icon3"
                     android:layout_width="@dimen/dimen_30"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -188,11 +196,51 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No. of Copies"
+                android:text="Page Numbers"
                 android:padding="@dimen/dimen_10"
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:layout_marginRight="@dimen/dimen_10"/>
-            <RelativeLayout
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dimen_5"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10"
+                android:weightSum="1">
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:hint="FROM"
+                    android:gravity="center"
+                    android:textSize="@dimen/textview_14"
+                    android:padding="@dimen/dimen_15"
+                    android:background="@drawable/transparent_square_box"
+                    android:id="@+id/editText" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:text="TO"
+                    android:gravity="center"
+                    android:padding="@dimen/dimen_10"
+                    android:textColor="@color/colorBlack"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:hint="TO"
+                    android:gravity="center"
+                    android:padding="@dimen/dimen_15"
+                    android:textSize="@dimen/textview_14"
+                    android:background="@drawable/transparent_square_box"/>
+
+            </LinearLayout>
+            <!--<RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_5"
@@ -214,6 +262,40 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_alert_circle_outline_grey600_24dp"/>
+            </RelativeLayout>-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Page Type"
+                android:padding="@dimen/dimen_10"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:layout_marginRight="@dimen/dimen_10"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10"
+                android:background="@drawable/transparent_square_box">
+                <!--<TextView
+                    android:layout_toLeftOf="@+id/icon1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A4"
+                    android:padding="@dimen/dimen_10"/>-->
+                <Spinner
+                    android:id="@+id/paper_type_spinner"
+                    android:layout_toLeftOf="@+id/icon7"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                </Spinner>
+                <ImageView
+                    android:id="@+id/icon7"
+                    android:layout_width="@dimen/dimen_30"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_alert_circle_outline_grey600_24dp"/>
             </RelativeLayout>
 
             <TextView
@@ -226,21 +308,25 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_5"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:layout_marginBottom="@dimen/dimen_10"
                 android:background="@drawable/transparent_square_box">
-                <TextView
-                    android:layout_toLeftOf="@+id/icon6"
+                <!--<TextView
+                    android:layout_toLeftOf="@+id/icon1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Collated"
-                    android:padding="@dimen/dimen_10"
-                    android:layout_centerInParent="true"
-                    android:gravity="center_vertical"/>
+                    android:text="A4"
+                    android:padding="@dimen/dimen_10"/>-->
+                <Spinner
+                    android:id="@+id/collated_uncollated_spinner"
+                    android:layout_toLeftOf="@+id/icon8"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                </Spinner>
                 <ImageView
-                    android:id="@+id/icon6"
+                    android:id="@+id/icon8"
                     android:layout_width="@dimen/dimen_30"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

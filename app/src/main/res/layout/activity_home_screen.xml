@@ -135,17 +135,20 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="1dp"/>-->
 
-                                    <RelativeLayout
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="60dp"
+                                        android:orientation="horizontal"
                                         android:gravity="center_vertical"
-                                        android:padding="@dimen/dimen_5">
+                                        android:padding="@dimen/dimen_5"
+                                        android:weightSum="4">
 
                                         <RelativeLayout
                                             android:id="@+id/historylay"
-                                            android:layout_width="70dp"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:gravity="center">
+                                            android:gravity="center"
+                                            android:layout_weight="1">
 
                                             <ImageView
                                                 android:padding="@dimen/dimen_5"
@@ -168,11 +171,12 @@
 
                                         <RelativeLayout
                                             android:id="@+id/promotionslay"
-                                            android:layout_width="70dp"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="@dimen/dimen_10"
                                             android:layout_toRightOf="@+id/historylay"
-                                            android:gravity="center">
+                                            android:gravity="center"
+                                            android:layout_weight="1">
 
                                             <ImageView
                                                 android:padding="@dimen/dimen_5"
@@ -192,14 +196,41 @@
                                                 android:textColor="@color/colorBlack"
                                                 android:textSize="@dimen/textview_14" />
                                         </RelativeLayout>
+                                        <RelativeLayout
+                                            android:id="@+id/jobslay"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dimen_10"
+                                            android:layout_toRightOf="@+id/promotionslay"
+                                            android:gravity="center"
+                                            android:layout_weight="1">
+
+                                            <ImageView
+                                                android:padding="@dimen/dimen_5"
+                                                android:layout_width="30dp"
+                                                android:layout_height="30dp"
+                                                android:layout_above="@+id/text4"
+                                                android:layout_centerHorizontal="true"
+                                                android:src="@drawable/gift" />
+
+                                            <TextView
+                                                android:id="@+id/text4"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentBottom="true"
+                                                android:gravity="center"
+                                                android:text="Jobs"
+                                                android:textColor="@color/colorBlack"
+                                                android:textSize="@dimen/textview_14" />
+                                        </RelativeLayout>
 
                                         <RelativeLayout
                                             android:id="@+id/addpointlay"
-                                            android:layout_width="70dp"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentRight="true"
-                                            android:layout_marginRight="@dimen/dimen_10"
-                                            android:gravity="center">
+                                            android:gravity="center"
+                                            android:layout_weight="1">
 
                                             <ImageView
                                                 android:padding="@dimen/dimen_5"
@@ -214,14 +245,12 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:layout_alignParentBottom="true"
-                                                android:layout_alignParentLeft="true"
-                                                android:layout_alignParentStart="true"
                                                 android:gravity="center"
                                                 android:text="Add Points"
                                                 android:textColor="@color/colorBlack"
                                                 android:textSize="@dimen/textview_14" />
                                         </RelativeLayout>
-                                    </RelativeLayout>
+                                    </LinearLayout>
                                 </LinearLayout>
                                 <!--</android.support.v7.widget.CardView>-->
                             </android.support.v7.widget.CardView>

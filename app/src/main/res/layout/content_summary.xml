@@ -16,5 +16,15 @@
         android:gravity="center"
         android:textSize="@dimen/textview_24"
         android:textColor="@color/colorAccent"/>
+    <TextView
+        android:id="@+id/homescreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HOME"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/dimen_10"/>
 
 </RelativeLayout>

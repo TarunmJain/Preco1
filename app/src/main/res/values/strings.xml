@@ -28,6 +28,8 @@
     <string name="title_myprofile_gender">Gender</string>
     <string name="title_myprofile_phoneno">Phone Number*</string>
     <string name="title_myprofile_dept">Department</string>
+    <string name="title_myprofile_id">Student Id</string>
+    <string name="title_myprofile_collegename">College Name</string>
     <string name="title_myprofile_year">Year</string>
     <string name="title_myprofile_button_save">SAVE</string>
 
@@ -38,9 +40,11 @@
     <string name="title_promotion">Promotion</string>
     <string name="title_notification">Notification</string>
     <string name="title_pricing_info">Pricing Info</string>
+    <string name="title_address">Address</string>
     <string name="title_profile">My Profile</string>
     <string name="title_faqs">FAQs</string>
     <string name="title_helps_support">Helps / Support</string>
+    <string name="title_invite_friends">Invite Friends</string>
     <string name="title_logout">Logout</string>
     <string name="title_mobile_verification">Mobile Verification</string>
     <string name="title_enter_code">Enter Code</string>
@@ -69,5 +73,10 @@
     <string name="title_activity_add_preco_points">AddPrecoPoints</string>
     <string name="title_activity_pricing_info">PricingInfo</string>
     <string name="title_activity_history">History</string>
+    <string name="title_activity_terms_and_conditions">TermsAndConditions</string>
+    <string name="title_activity_forms">Forms</string>
+    <string name="title_activity_rating">Rating</string>
+    <string name="title_activity_copy">Copy</string>
+    <string name="title_activity_scan">Scan</string>
 
 </resources>

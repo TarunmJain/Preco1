@@ -14,7 +14,7 @@
     android:padding="64dp"
     android:layout_width="match_parent"
     android:layout_centerInParent="true"
-    android:src="@drawable/precologo"
+    android:src="@drawable/latestprecologo"
     android:layout_height="wrap_content" />
     <ProgressBar
         android:id="@+id/progressBar"

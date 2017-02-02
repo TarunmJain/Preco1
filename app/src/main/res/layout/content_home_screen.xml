@@ -148,7 +148,7 @@
                     android:id="@+id/scantext"
                     android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
-                    android:text="Photo Copy"
+                    android:text="Copy"
                     android:textColor="@color/colorBlack"
 
                     android:gravity="center"
@@ -172,7 +172,7 @@
                     android:id="@+id/jobstext"
                     android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
-                    android:text="Jobs"
+                    android:text="Forms"
                     android:textColor="@color/colorBlack"
                     android:gravity="center"
                     android:layout_height="wrap_content" />

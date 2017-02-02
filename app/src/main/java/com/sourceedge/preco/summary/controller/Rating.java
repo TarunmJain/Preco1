@@ -9,29 +9,35 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sourceedge.preco.R;
 import com.sourceedge.preco.homescreen.controller.HomeScreen;
 
-public class Summary extends AppCompatActivity {
+public class Rating extends AppCompatActivity {
     Toolbar toolbar;
-    TextView homescreen;
+    RatingBar rating;
+    TextView ratingSubmit;
+    String rating1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_summary);
+        setContentView(R.layout.activity_rating);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Job Done");
+        toolbar.setTitle("Ratings");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        homescreen=(TextView)findViewById(R.id.homescreen);
+        rating=(RatingBar)findViewById(R.id.rating);
+        ratingSubmit=(TextView)findViewById(R.id.rating_submit);
+        rating1= String.valueOf(rating.getRating());
         OnClicks();
     }
 
     private void OnClicks() {
-        homescreen.setOnClickListener(new View.OnClickListener() {
+        ratingSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
@@ -60,6 +66,13 @@ public class Summary extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(Summary.this,Rating.class));
+        /*if(rating1.matches("0.0")){
+            Toast.makeText(Rating.this,"Please Rate it...",Toast.LENGTH_SHORT).show();
+        }else {*/
+            Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
+        //}
     }
 }

@@ -49,6 +49,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.plus.Plus;
 import com.sourceedge.preco.R;
 import com.sourceedge.preco.bookphotocopy.controller.BookPhotoCopy;
+import com.sourceedge.preco.bookphotocopy.controller.Copy;
+import com.sourceedge.preco.bookphotocopy.controller.Scan;
+import com.sourceedge.preco.forms.controller.Forms;
 import com.sourceedge.preco.history.controller.History;
 import com.sourceedge.preco.location.controller.Locations;
 import com.sourceedge.preco.location.controller.MapsActivity;
@@ -127,7 +130,7 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
             public void onClick(View v) {
                 //REVERT BACK
                 Class_Static.isCopyScan = true;
-                startActivity(new Intent(HomeScreen.this, Locations.class));
+                startActivity(new Intent(HomeScreen.this, Scan.class));
                 //startActivity(new Intent(HomeScreen.this,UploadFile.class));
             }
         });
@@ -136,7 +139,7 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
             @Override
             public void onClick(View v) {
                 Class_Static.isCopyScan = false;
-                startActivity(new Intent(HomeScreen.this, BookPhotoCopy.class));
+                startActivity(new Intent(HomeScreen.this, Copy.class));
 
             }
         });
@@ -144,7 +147,7 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
         jobs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //        startActivity(new Intent(HomeScreen.this, BookPhotoCopy.class));
+                        startActivity(new Intent(HomeScreen.this, Forms.class));
 
             }
         });

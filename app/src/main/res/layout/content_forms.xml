@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_forms"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sourceedge.preco.forms.controller.Forms"
+    tools:showIn="@layout/activity_forms">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Form Type"
+                android:padding="@dimen/dimen_10"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/transparent_square_box">
+
+                <Spinner
+                    android:id="@+id/form_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Number Of Copies"
+                android:padding="@dimen/dimen_10"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:padding="@dimen/dimen_15"
+                android:background="@drawable/transparent_square_box"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10"/>
+
+            <TextView
+                android:id="@+id/forms_confirm"
+                android:layout_width="@dimen/dimen_150"
+                android:layout_height="wrap_content"
+                android:text="CONFIRM"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorAccent"
+                android:padding="@dimen/dimen_10"
+                android:layout_marginTop="@dimen/dimen_10"/>
+
+
+        </LinearLayout>
+
+</RelativeLayout>

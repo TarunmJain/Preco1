@@ -29,11 +29,10 @@
             <ImageView
                 android:id="@+id/textView"
                 android:layout_above="@+id/layout"
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                android:background="@drawable/precologo"/>
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:background="@drawable/latestprecologo"/>
         </LinearLayout>
-
 
 
         <LinearLayout
@@ -95,7 +94,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_50"
+                android:layout_marginTop="@dimen/dimen_30"
                 android:text="------- Login Using -------"
                 android:gravity="center"/>
 
@@ -179,7 +178,7 @@
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/dimen_20"
+                android:layout_marginTop="@dimen/dimen_10"
                 android:weightSum="2">
 
                 <TextView
@@ -219,7 +218,16 @@
                         android:textColor="@color/colorAccent"/>
                 </LinearLayout>
 
+
+
             </LinearLayout>
+            <TextView
+                android:id="@+id/terms_and_conditions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Terms and Conditions"
+                android:gravity="center"
+                android:padding="@dimen/dimen_5"/>
 
 
 

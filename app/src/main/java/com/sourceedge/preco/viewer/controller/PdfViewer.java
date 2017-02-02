@@ -119,7 +119,7 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PdfViewer.this, Payments.class));
+                startActivity(new Intent(PdfViewer.this, SlotSelection.class));
             }
         });
 

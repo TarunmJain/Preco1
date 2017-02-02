@@ -317,8 +317,8 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         //Class_Model_DB.Printers.add(new ModelPrinters("My Location",new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude()))));
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
+       // MarkerOptions markerOptions = new MarkerOptions();
+       // markerOptions.position(latLng);
         // markerOptions.title("Current Position");
         //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         //mCurrLocationMarker = mMap.addMarker(markerOptions);
@@ -330,10 +330,12 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
                     .snippet("Population: 4,137,400")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));*/
             MarkerOptions markerOptions1 = new MarkerOptions();
-            IconGenerator iconFactory = new IconGenerator(this);
-            iconFactory.setStyle(IconGenerator.STYLE_RED);
-            markerOptions1.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(printer.getTitle())));
-            markerOptions1.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
+            //IconGenerator iconFactory = new IconGenerator(this);
+            //iconFactory.setStyle(IconGenerator.STYLE_RED);
+            markerOptions1.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_local_printshop_black_24dp));
+
+            //markerOptions1.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
+
             markerOptions1.position(printer.getMarker().getPosition());
             markerOptions1.title(printer.getTitle());
             //markerOptions1.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
@@ -352,7 +354,7 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
 
 
         //stop location updates

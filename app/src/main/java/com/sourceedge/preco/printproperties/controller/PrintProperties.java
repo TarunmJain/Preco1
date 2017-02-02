@@ -21,8 +21,12 @@ import java.util.ArrayList;
 public class PrintProperties extends AppCompatActivity {
     Toolbar toolbar;
     TextView nextButton;
-    Spinner spinner;
+    Spinner paperSizeSpinner,colorSpinner,singleDoublespinner,pageTypeSpinner,collatedUncollatedSpinner;
     ArrayList<String> paperSize;
+    ArrayList<String> color;
+    ArrayList<String> singleDouble;
+    ArrayList<String> pageType;
+    ArrayList<String> collatedUncollated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,11 @@ public class PrintProperties extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         nextButton = (TextView) findViewById(R.id.next_button);
-        spinner=(Spinner)findViewById(R.id.paper_size_spinner);
+        paperSizeSpinner=(Spinner)findViewById(R.id.paper_size_spinner);
+        colorSpinner=(Spinner)findViewById(R.id.color_spinner);
+        singleDoublespinner=(Spinner)findViewById(R.id.single_double_spinner);
+        pageTypeSpinner=(Spinner)findViewById(R.id.paper_type_spinner);
+        collatedUncollatedSpinner=(Spinner)findViewById(R.id.collated_uncollated_spinner);
         Initialization();
         AddSpinner();
         OnClicks();
@@ -42,13 +50,48 @@ public class PrintProperties extends AppCompatActivity {
     private void AddSpinner() {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paperSize);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
+        paperSizeSpinner.setAdapter(dataAdapter);
+
+        ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, color);
+        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        colorSpinner.setAdapter(dataAdapter1);
+
+        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, singleDouble);
+        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        singleDoublespinner.setAdapter(dataAdapter2);
+
+        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, pageType);
+        dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pageTypeSpinner.setAdapter(dataAdapter3);
+
+        ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, collatedUncollated);
+        dataAdapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        collatedUncollatedSpinner.setAdapter(dataAdapter4);
     }
 
     private void Initialization() {
         paperSize=new ArrayList<String>();
         paperSize.add("A4");
         paperSize.add("A3");
+
+        color=new ArrayList<String>();
+        color.add("Black");
+        color.add("Color");
+
+        singleDouble=new ArrayList<String>();
+        singleDouble.add("Single");
+        singleDouble.add("Double");
+
+        pageType=new ArrayList<String>();
+        pageType.add("70mm");
+        pageType.add("75mm");
+        pageType.add("80mm");
+        pageType.add("Glossy");
+        pageType.add("Matte");
+
+        collatedUncollated=new ArrayList<String>();
+        collatedUncollated.add("Collated");
+        collatedUncollated.add("Uncollated");
     }
 
     private void OnClicks() {

@@ -149,20 +149,39 @@
         <activity
             android:name=".history.controller.History"
             android:label="@string/title_activity_history"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <service
-            android:name=".notification.controller.MyFirebaseMessagingService">
+        <service android:name=".notification.controller.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name=".notification.controller.MyFirebaseInstanceIDService">
+        <service android:name=".notification.controller.MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".login.controller.TermsAndConditions"
+            android:label="@string/title_activity_terms_and_conditions"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".forms.controller.Forms"
+            android:label="@string/title_activity_forms"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".summary.controller.Rating"
+            android:label="@string/title_activity_rating"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".bookphotocopy.controller.Copy"
+            android:label="@string/title_activity_copy"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".bookphotocopy.controller.Scan"
+            android:label="@string/title_activity_scan"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

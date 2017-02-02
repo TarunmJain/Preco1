@@ -137,6 +137,34 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/title_myprofile_id"
+                android:padding="@dimen/dimen_10"/>
+            <EditText
+                android:id="@+id/myprofile_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:background="@drawable/transparent_square_box"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_myprofile_collegename"
+                android:padding="@dimen/dimen_10"/>
+            <EditText
+                android:id="@+id/myprofile_collname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:background="@drawable/transparent_square_box"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/title_myprofile_dept"
                 android:padding="@dimen/dimen_10"/>
             <EditText

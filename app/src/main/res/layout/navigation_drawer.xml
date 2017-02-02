@@ -112,6 +112,31 @@
                 android:background="@color/colorGrey"/>
 
             <LinearLayout
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/dimen_16">
+                <!--<ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cast_ic_notification_0"/>-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_32"
+                    android:gravity="bottom"
+                    android:textColor="@color/colorBlack"
+
+                    android:text="@string/title_address"
+                    android:textSize="@dimen/textview_18" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGrey"/>
+
+            <LinearLayout
                 android:id="@+id/faqs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,6 +179,30 @@
                     android:textColor="@color/colorBlack"
 
                     android:text="@string/title_helps_support"
+                    android:textSize="@dimen/textview_18" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGrey"/>
+            <LinearLayout
+                android:id="@+id/invite_friends"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/dimen_16">
+                <!--<ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cast_ic_notification_0"/>-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_32"
+                    android:gravity="bottom"
+                    android:textColor="@color/colorBlack"
+
+                    android:text="@string/title_invite_friends"
                     android:textSize="@dimen/textview_18" />
             </LinearLayout>
             <View

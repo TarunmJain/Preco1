@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     private PrefManager prefManager;
 
     EditText username, password;
-    TextView loginButton;
+    TextView loginButton,termsAndConditions;
     LinearLayout registerNow;
     SharedPreferences sharedPreferences;
     LoginButton loginButton1;
@@ -112,6 +112,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         loginButton = (TextView) findViewById(R.id.login_button);
+        termsAndConditions=(TextView)findViewById(R.id.terms_and_conditions);
         registerNow = (LinearLayout) findViewById(R.id.register_now);
         fbLogin=(ImageButton)findViewById(R.id.fb_login_button);
         googleLogin=(ImageButton)findViewById(R.id.g_sign_in_button);
@@ -297,6 +298,14 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, NewRegister.class));
+            }
+        });
+
+        termsAndConditions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this, TermsAndConditions.class));
+
             }
         });
     }
