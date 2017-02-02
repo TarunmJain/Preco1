@@ -16,39 +16,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Machine Details"
-                android:padding="@dimen/dimen_10"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_150"
-                android:background="@drawable/transparent_square_box"
-                android:layout_marginLeft="@dimen/dimen_10"
-                android:layout_marginRight="@dimen/dimen_10"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Address"
-                android:padding="@dimen/dimen_10"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_150"
-                android:background="@drawable/transparent_square_box"
-                android:layout_marginLeft="@dimen/dimen_10"
-                android:layout_marginRight="@dimen/dimen_10"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Machine care taker details :"
-
-                android:padding="@dimen/dimen_10"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Phone No"
+                android:text="Pages"
                 android:padding="@dimen/dimen_10"/>
             <TextView
                 android:layout_width="match_parent"
@@ -57,41 +29,67 @@
                 android:background="@drawable/transparent_square_box"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:padding="@dimen/dimen_10"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/transparent_square_box"
-                android:layout_marginLeft="@dimen/dimen_10"
-                android:layout_marginRight="@dimen/dimen_10"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Date of Submission"
-                android:padding="@dimen/dimen_10"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/transparent_square_box"
-                android:layout_marginLeft="@dimen/dimen_10"
-                android:layout_marginRight="@dimen/dimen_10"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Book deposit time:"
+                android:text="Single/Double"
                 android:padding="@dimen/dimen_10"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text=""
                 android:background="@drawable/transparent_square_box"
                 android:layout_marginLeft="@dimen/dimen_10"
-                android:layout_marginRight="@dimen/dimen_10"
-                android:layout_marginBottom="@dimen/dimen_10"/>
+                android:layout_marginRight="@dimen/dimen_10"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Promo Code"
+                android:padding="@dimen/dimen_10"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:background="@drawable/transparent_square_box"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Binding"
+                android:padding="@dimen/dimen_10"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/login_member"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:padding="5dp"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/login_admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="No" />
+            </RadioGroup>
+
+
+
+
 
 
         </LinearLayout>
@@ -101,7 +99,7 @@
         android:id="@+id/bookphotocopy_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NEXT"
+        android:text="CONFIRM"
         android:gravity="center"
         android:textColor="@color/colorWhite"
         android:background="@color/colorAccent"

@@ -84,5 +84,72 @@
             android:layout_gravity="center"/>
 
     </LinearLayout>
+=======
+
+    <ScrollView
+        android:layout_above="@+id/bookphotocopy_next"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pages"
+                android:padding="@dimen/dimen_10"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:background="@drawable/transparent_square_box"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Single/Double"
+                android:padding="@dimen/dimen_10"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:background="@drawable/transparent_square_box"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Promo Code"
+                android:padding="@dimen/dimen_10"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:background="@drawable/transparent_square_box"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:layout_marginRight="@dimen/dimen_10"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/bookphotocopy_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONFIRM"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/dimen_10"
+        android:layout_alignParentBottom="true"/>
+
+
+>>>>>>> github/master
 
 </RelativeLayout>

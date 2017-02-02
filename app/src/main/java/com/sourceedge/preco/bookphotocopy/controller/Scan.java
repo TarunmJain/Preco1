@@ -24,6 +24,8 @@ public class Scan extends AppCompatActivity {
     ArrayList<String> singleDouble;
     TextView scanConfirm;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,11 @@ public class Scan extends AppCompatActivity {
                 startActivity(new Intent(Scan.this, Payments.class));
             }
         });
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
 
     @Override
@@ -76,6 +83,5 @@ public class Scan extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
-
 
 }
