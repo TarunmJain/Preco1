@@ -69,6 +69,7 @@ import com.sourceedge.preco.printproperties.controller.PrintProperties;
 import com.sourceedge.preco.support.Class_Genric;
 import com.sourceedge.preco.support.Class_Model_DB;
 import com.sourceedge.preco.support.Class_Static;
+import com.sourceedge.preco.support.Class_SyncApi;
 import com.sourceedge.preco.support.MyApplication;
 import com.sourceedge.preco.support.PickAndPreview;
 import com.sourceedge.preco.uploadfile.controller.UploadFile;
@@ -105,6 +106,8 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
             Class_Genric.requestPermission(HomeScreen.this);
         }
         Class_Genric.turnGPSOn(HomeScreen.this);
+        Class_SyncApi.ServiceApi(HomeScreen.this);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         toolbar.setTitle("Preco");

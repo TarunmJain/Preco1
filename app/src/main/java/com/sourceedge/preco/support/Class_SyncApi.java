@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -17,16 +18,22 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sourceedge.preco.homescreen.controller.HomeScreen;
 import com.sourceedge.preco.login.controller.Login;
 import com.sourceedge.preco.register.controller.PrefManager;
 import com.sourceedge.preco.register.controller.WelcomeActivity;
 import com.sourceedge.preco.support.models.KeyValuePair;
+import com.sourceedge.preco.support.models.Services;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Centura User3 on 1/27/2017.
@@ -38,7 +45,7 @@ public class Class_SyncApi {
     static int mStatusCode = 0;
     static Gson gson;
 
-    public static void LoginApi(final Context context, final EditText username, final EditText password,String deviceid,String os) {
+    public static void LoginApi(final Context context, final EditText username, final EditText password, String deviceid, String os) {
         sharedPreferences = context.getSharedPreferences(Class_Genric.MyPref, context.MODE_PRIVATE);
         RequestQueue queue = Volley.newRequestQueue(context);
         ArrayList<KeyValuePair> params = new ArrayList<KeyValuePair>();
@@ -57,17 +64,18 @@ public class Class_SyncApi {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             gson = new Gson();
                             JSONObject jsonObject = new JSONObject(response);
-                            String s=jsonObject.optString("Token");
+                            String s = jsonObject.optString("Token");
                             editor.putString(Class_Genric.Sp_Status, "LoggedIn");
                             editor.putString(Class_Genric.Sp_Token, jsonObject.optString("Token"));
                             editor.putString(Class_Genric.Sp_Balance, jsonObject.optString("Balance"));
                             editor.commit();
                             prefManager = new PrefManager(context);
                             if (!prefManager.isFirstTimeLaunch())
-                                ((Activity)context).startActivity(new Intent(context, HomeScreen.class));
-                            else ((Activity)context).startActivity(new Intent(context, WelcomeActivity.class));
+                                ((Activity) context).startActivity(new Intent(context, HomeScreen.class));
+                            else
+                                ((Activity) context).startActivity(new Intent(context, WelcomeActivity.class));
                             Toast.makeText(context, "Successfully Logged In", Toast.LENGTH_SHORT).show();
-                            ((Activity)context).finish();
+                            ((Activity) context).finish();
                             break;
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -95,7 +103,83 @@ public class Class_SyncApi {
                 }
 
             }
-        }){
+        }) {
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                mStatusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+        };
+        queue.add(postRequest);
+    }
+
+    public static void ServiceApi(final Context context) {
+        sharedPreferences = context.getSharedPreferences(Class_Genric.MyPref, context.MODE_PRIVATE);
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        /*ArrayList<KeyValuePair> params = new ArrayList<KeyValuePair>();
+        params.add(new KeyValuePair("UserName", username.getText().toString().trim()));
+        params.add(new KeyValuePair("Password", password.getText().toString().trim()));
+        params.add(new KeyValuePair("DeviceId", deviceid));
+        params.add(new KeyValuePair("OS", os));*/
+
+        Class_Genric.ShowDialog(context, "Loading...", true);
+        StringRequest postRequest = new StringRequest(Request.Method.GET, Class_Urls.GetServices, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Class_Genric.ShowDialog(context, "Loading...", false);
+                switch (mStatusCode) {
+                    case 200:
+                        try {
+                            ArrayList<Services> services = new ArrayList<Services>();
+                            //SharedPreferences.Editor editor = sharedPreferences.edit();
+                            gson = new Gson();
+                            JSONArray jsonObject = new JSONArray(response);
+                            Type listtype = new TypeToken<ArrayList<Services>>() {
+                            }.getType();
+                            services = gson.fromJson(jsonObject.toString(), listtype);
+                            Class_Model_DB.setServiceslist(services);
+
+                            break;
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Class_Genric.ShowDialog(context, "Loading...", false);
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Class_Genric.NetCheck(context);
+                } else {
+                    if (error != null && error.networkResponse != null) {
+                        mStatusCode = error.networkResponse.statusCode;
+                        switch (mStatusCode) {
+                            case 400:
+                                //username.setError("Username or Password Invalid");
+                                Toast.makeText(context, "Bad Request", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 401:
+                                //password.setError("Password Invalid");
+                                Toast.makeText(context, "Token Invalid", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    } else Toast.makeText(context, "Server Down", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        })
+
+        {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + sharedPreferences.getString(Class_Genric.Sp_Token, ""));
+                return params;
+            }
+
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
                 mStatusCode = response.statusCode;
