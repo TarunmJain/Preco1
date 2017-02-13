@@ -23,9 +23,9 @@ public class FeedData {
                 ", EC Department ,\n" +
                 "Malleswaram,Bangalore - 560003";
 
-        Class_Model_DB.Printers.add(new ModelPrinters("MES College",new MarkerOptions().position(new LatLng(13.021745, 77.554492)).icon(BitmapDescriptorFactory.defaultMarker()),adtrssMes,"1.2 kms"));
-        Class_Model_DB.Printers.add(new ModelPrinters("Pesit College",new MarkerOptions().position(new LatLng(13.005616,77.579021)).icon(BitmapDescriptorFactory.defaultMarker()),addressPeset,"8.1 kms"));
-        Class_Model_DB.Printers.add(new ModelPrinters("BMS College",new MarkerOptions().position(new LatLng(13.002346,77.582461)).icon(BitmapDescriptorFactory.defaultMarker()),adressBms,"6.9 kms"));
+        Class_Model_DB.Printers.add(new ModelPrinters("MES College","70|80|85|90","Black and White",true,new MarkerOptions().position(new LatLng(13.021745, 77.554492)).icon(BitmapDescriptorFactory.defaultMarker()),adtrssMes,"1.2 kms"));
+        Class_Model_DB.Printers.add(new ModelPrinters("Pesit College","70|80|85|90","Color",false,new MarkerOptions().position(new LatLng(13.005616,77.579021)).icon(BitmapDescriptorFactory.defaultMarker()),addressPeset,"8.1 kms"));
+        Class_Model_DB.Printers.add(new ModelPrinters("BMS College","70|80|85|90","Black and White",true,new MarkerOptions().position(new LatLng(13.002346,77.582461)).icon(BitmapDescriptorFactory.defaultMarker()),adressBms,"6.9 kms"));
        // Class_Model_DB.Printers.add(new ModelPrinters("Print Xpress",new MarkerOptions().position(new LatLng(13.001962,77.581759)).icon(BitmapDescriptorFactory.defaultMarker())));
     }
 

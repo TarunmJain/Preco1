@@ -32,6 +32,7 @@ public class Rating extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         rating=(RatingBar)findViewById(R.id.rating);
         ratingSubmit=(TextView)findViewById(R.id.rating_submit);
+        rating.setRating((float) 1.0);
         rating1= String.valueOf(rating.getRating());
         OnClicks();
     }

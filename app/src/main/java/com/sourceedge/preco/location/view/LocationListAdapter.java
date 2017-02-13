@@ -33,8 +33,9 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
         holder.next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Class_Model_DB.SelectedPrinter=Class_Model_DB.Printers.get(position);
-                Locations.next.performClick();
+                Locations.setCameraLocation(position);
+               /* Class_Model_DB.SelectedPrinter=Class_Model_DB.Printers.get(position);
+                Locations.next.performClick();*/
             }
         });
     }
@@ -54,6 +55,8 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
             distance= (TextView) v.findViewById(R.id.distance);
             next= (LinearLayout) v.findViewById(R.id.next);
         }
+
+
     }
 
 }

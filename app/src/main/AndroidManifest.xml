@@ -27,7 +27,7 @@
         android:name=".support.MyApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@drawable/precoicon"
+        android:icon="@drawable/luanchericon"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
@@ -42,6 +42,7 @@
         <activity
             android:name=".login.controller.Splash"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,6 +53,7 @@
         <activity
             android:name=".login.controller.Login"
             android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -62,26 +64,32 @@
         <activity
             android:name=".register.controller.NewRegister"
             android:label="@string/title_activity_new_register"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".register.controller.WelcomeActivity"
             android:label="@string/title_activity_welcome"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".homescreen.controller.HomeScreen"
             android:label="@string/title_activity_home_screen"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".register.controller.MobileVerification"
             android:label="@string/title_activity_mobile_verification"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".myprofile.controller.MyProfile"
             android:label="@string/title_activity_my_profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".location.controller.Locations"
             android:label="@string/title_activity_location"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -97,58 +105,67 @@
 
         <activity
             android:name=".location.controller.MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".uploadfile.controller.UploadFile"
             android:label="@string/title_activity_upload_file"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".printproperties.controller.PrintProperties"
             android:label="@string/title_activity_print_properties"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".timeslots.controller.SlotSelection"
             android:label="@string/title_activity_slot_selection"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".payment.controller.Payments"
             android:label="@string/title_activity_payments"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".summary.controller.Summary"
             android:label="@string/title_activity_summary"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".bookphotocopy.controller.BookPhotoCopy"
             android:label="@string/title_activity_book_photo_copy"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".bookphotocopy.controller.BookProperties"
             android:label="@string/title_activity_book_properties"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".support.PrintCustomContent"
-            android:label="@string/title_activity_book_properties"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewer.controller.Viewer"
             android:label="@string/title_activity_viewer"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewer.controller.PdfViewer"
             android:label="@string/title_activity_pdf_viewer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".payment.controller.AddPrecoPoints"
             android:label="@string/title_activity_add_preco_points"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".pricinginfo.controller.PricingInfo"
             android:label="@string/title_activity_pricing_info"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".history.controller.History"
             android:label="@string/title_activity_history"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".notification.controller.MyFirebaseMessagingService">
@@ -165,22 +182,35 @@
         <activity
             android:name=".login.controller.TermsAndConditions"
             android:label="@string/title_activity_terms_and_conditions"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".forms.controller.Forms"
             android:label="@string/title_activity_forms"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".summary.controller.Rating"
             android:label="@string/title_activity_rating"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".bookphotocopy.controller.Copy"
             android:label="@string/title_activity_copy"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".bookphotocopy.controller.Scan"
             android:label="@string/title_activity_scan"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".myprofile.controller.ChangePassword"
+            android:label="@string/title_activity_change_password"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".login.controller.Password"
+            android:label="@string/title_activity_password"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -11,6 +11,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -34,6 +35,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -62,14 +64,9 @@ import static com.sourceedge.preco.viewer.controller.PdfViewer.context;
 
 public class Locations extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener, GoogleMap.OnInfoWindowClickListener {
     Toolbar toolbar;
     public static TextView next;
-    //public static GoogleMap mMap;
-    Dialog dialog;
-    TextView copiesScan;
-    Button nextButton, cancelButton;
-    ImageView decrement, increment;
     RecyclerView recyclerView;
     TextView scrollup;
     public static GoogleMap mMap;
@@ -121,7 +118,7 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
                 if (SelectedPrinter != null) {
                     if (Class_Static.isCopyScan) {
 
-                       // startActivity(new Intent(Locations.this, Scan.class));
+                        // startActivity(new Intent(Locations.this, Scan.class));
 
                        /* dialog = new Dialog(Locations.this);
                         dialog.setContentView(R.layout.dialog_copies);
@@ -184,8 +181,7 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
         scrollup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isOpen)
-                {
+                if (isOpen) {
                     linearLayoutManager = new LinearLayoutManager(Locations.this) {
                         @Override
                         public boolean canScrollVertically() {
@@ -194,9 +190,8 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
                     };
                     footer.setVisibility(View.VISIBLE);
                     scrollup.setText("View All");
-                    isOpen=false;
-                }
-                else{
+                    isOpen = false;
+                } else {
                     linearLayoutManager = new LinearLayoutManager(Locations.this) {
                         @Override
                         public boolean canScrollVertically() {
@@ -205,7 +200,7 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
                     };
                     footer.setVisibility(View.GONE);
                     scrollup.setText("View Less");
-                    isOpen=true;
+                    isOpen = true;
                 }
                 recyclerView.setLayoutManager(linearLayoutManager);
             }
@@ -313,6 +308,7 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
 
     @Override
     public void onLocationChanged(Location location) {
+        mMap.setOnInfoWindowClickListener(this);
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
@@ -321,32 +317,81 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         //Class_Model_DB.Printers.add(new ModelPrinters("My Location",new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude()))));
-       // MarkerOptions markerOptions = new MarkerOptions();
-       // markerOptions.position(latLng);
+        // MarkerOptions markerOptions = new MarkerOptions();
+        // markerOptions.position(latLng);
         // markerOptions.title("Current Position");
         //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         //mCurrLocationMarker = mMap.addMarker(markerOptions);
 
-        for (ModelPrinters printer : Class_Model_DB.Printers) {
+        for (int x = 0; x < Class_Model_DB.Printers.size(); x++) {
             /*mMap.addMarker(new MarkerOptions()
                     .position(printer.getMarker().getPosition())
                     .title(printer.getTitle())
                     .snippet("Population: 4,137,400")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));*/
+            ModelPrinters printer = Class_Model_DB.Printers.get(x);
             MarkerOptions markerOptions1 = new MarkerOptions();
             //IconGenerator iconFactory = new IconGenerator(this);
             //iconFactory.setStyle(IconGenerator.STYLE_RED);
-            markerOptions1.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_local_printshop_black_24dp));
+            markerOptions1.icon(BitmapDescriptorFactory.fromResource(R.drawable.purpleicon));
 
             //markerOptions1.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
 
             markerOptions1.position(printer.getMarker().getPosition());
             markerOptions1.title(printer.getTitle());
+            markerOptions1.zIndex(x);
             //markerOptions1.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-            mMap.addMarker(markerOptions1);
-        }
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            Marker label = mMap.addMarker(markerOptions1);
 
+            mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+                // Use default InfoWindow frame
+                @Override
+                public View getInfoWindow(Marker arg0) {
+                    return null;
+                }
+
+                // Defines the contents of the InfoWindow
+                @Override
+                public View getInfoContents(Marker arg0) {
+
+                    // Getting view from the layout file info_window_layout
+                    View v = getLayoutInflater().inflate(R.layout.popup, null);
+
+                    // Getting the position from the marker
+                    LatLng latLng = arg0.getPosition();
+
+                    // Getting reference to the TextView to set latitude
+                    TextView tvLat = (TextView) v.findViewById(R.id.printername);
+                    TextView operator = (TextView) v.findViewById(R.id.operator);
+
+                    // Getting reference to the TextView to set longitude
+                    TextView tvLng = (TextView) v.findViewById(R.id.printeroption);
+
+                    TextView tvcolor = (TextView) v.findViewById(R.id.printercolor);
+
+                    // Setting the latitude
+                    tvLat.setText(arg0.getTitle());
+                    if (Class_Model_DB.Printers.get((int) arg0.getZIndex()).isOperator())
+                        operator.setText("Yes");
+                    else operator.setText("No");
+
+                    // Setting the longitude
+                    tvLng.setText(Class_Model_DB.Printers.get((int) arg0.getZIndex()).getPaperType());
+
+                    tvcolor.setText(Class_Model_DB.Printers.get((int) arg0.getZIndex()).getColorType());
+
+
+                    // Returning the view containing InfoWindow contents
+                    return v;
+
+                }
+            });
+
+            //label.showInfoWindow();
+
+        }
+       /* mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker arg0) {
                 Class_Model_DB.SelectedPrinter = new ModelPrinters(arg0.getTitle(), arg0.getPosition());
@@ -354,11 +399,11 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
                 return true;
             }
 
-        });
+        });*/
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
 
 
         //stop location updates
@@ -370,6 +415,44 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Class_Model_DB.SelectedPrinter = new ModelPrinters(marker.getTitle(), marker.getPosition());
+        next.performClick();
+    }
+
+    public static void setCameraLocation(int pos) {
+        CameraUpdate center =
+                CameraUpdateFactory.newLatLng(Class_Model_DB.Printers.get(pos).getMarker().getPosition());
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
+        //animateTo(Class_Model_DB.Printers.get(pos).getMarker().getPosition(),15,0,0,500);
+        mMap.moveCamera(center);
+        mMap.animateCamera(zoom);
+
+    }
+
+    private static void animateTo(LatLng mCurrentPosition, double zoom, double bearing, double tilt, final int milliseconds) {
+
+
+
+        // animate camera jumps too much
+        // so we set the camera instantly to the next point
+
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(mCurrentPosition,(float)zoom, (float)tilt, (float)bearing)));
+
+        // give Android a break so it can load tiles. If I start the animation
+        // without pause, no tile loading is done
+
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                // keeping numbers small you get a nice scrolling effect
+                mMap.animateCamera(CameraUpdateFactory.scrollBy(250-(float)Math.random()*500-250, 250-(float)Math.random()*500),milliseconds,null);
+
+            }},500);
 
     }
 }

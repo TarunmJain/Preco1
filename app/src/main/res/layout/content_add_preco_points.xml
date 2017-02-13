@@ -11,7 +11,6 @@
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
     <LinearLayout
-        android:layout_above="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -19,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter Coupon Code"
+            android:text="Enter Promo Code"
             android:padding="@dimen/dimen_10"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textview_18"
@@ -35,26 +34,18 @@
             android:layout_marginRight="@dimen/dimen_40"
             android:layout_marginTop="@dimen/dimen_20"
             android:background="@drawable/accent_border"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/footer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
         <TextView
             android:id="@+id/apply_button"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/dimen_150"
             android:layout_height="wrap_content"
             android:text="APPLY"
             android:textColor="@color/colorWhite"
             android:gravity="center"
-            android:padding="@dimen/dimen_10"
+            android:padding="@dimen/dimen_15"
+            android:layout_marginLeft="@dimen/dimen_40"
+            android:layout_marginRight="@dimen/dimen_40"
+            android:layout_marginTop="@dimen/dimen_20"
             android:background="@color/colorPrimary"/>
-
     </LinearLayout>
-
-
 
 </RelativeLayout>

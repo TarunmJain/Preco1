@@ -112,14 +112,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Preco Points :"
+                    android:text="Cost :"
                     android:layout_marginLeft="@dimen/dimen_5"
                     android:textColor="@color/colorWhite"
                     android:gravity="center|left"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="22 pts"
+                    android:text="22 Preco points"
                     android:layout_marginLeft="@dimen/dimen_5"
                     android:textColor="#FF5722"
                     android:gravity="center|left"/>

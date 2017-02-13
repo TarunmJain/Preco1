@@ -12,18 +12,20 @@
     android:focusableInTouchMode="true">
 
     <ScrollView
-        android:layout_above="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/title_myprofile_name"
-                android:padding="@dimen/dimen_10"/>
+                android:padding="@dimen/dimen_10"
+                android:id="@+id/textView2" />
+
             <EditText
                 android:id="@+id/myprofile_name"
                 android:layout_width="match_parent"
@@ -50,21 +52,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/title_myprofile_password"
                 android:padding="@dimen/dimen_10"/>
-            <EditText
+            <TextView
                 android:id="@+id/myprofile_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:padding="14dp"
                 android:background="@drawable/transparent_square_box"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"/>
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/change_password"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Change password"
                 android:textSize="@dimen/textview_16"
                 android:textColor="@color/colorAccent"
-                android:gravity="right"
+                android:layout_gravity="right"
                 android:padding="@dimen/dimen_10"/>
             <ImageView
                 android:id="@+id/profile_pic"
@@ -126,10 +129,10 @@
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add new Phone No"
-                android:gravity="right"
+                android:layout_gravity="right"
                 android:textSize="@dimen/textview_16"
                 android:textColor="@color/colorAccent"
                 android:padding="@dimen/dimen_10"/>
@@ -190,26 +193,19 @@
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:layout_marginBottom="@dimen/dimen_10"/>
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/title_myprofile_button_save"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorAccent"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:elevation="@dimen/dimen_10"/>
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/footer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-        <Button
-            android:id="@+id/button_save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-             android:text="@string/title_myprofile_button_save"
-            android:textColor="@color/colorWhite"
-            android:background="@color/colorAccent"
-            android:elevation="@dimen/dimen_10"/>
-    </LinearLayout>
 
 
 </RelativeLayout>

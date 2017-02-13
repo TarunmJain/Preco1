@@ -5,16 +5,20 @@
     android:elevation="24dp"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorWhite">
         <TextView
             android:id="@+id/maintext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Copy / Scan"
+            android:text="Color Type"
             android:textColor="#000000"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -22,7 +26,69 @@
             android:paddingBottom="10dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_marginRight="@dimen/dimen_20">
+
+            <LinearLayout
+                android:id="@+id/black_and_white_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:orientation="horizontal"
+                android:padding="@dimen/dimen_5">
+                <CheckBox
+                    android:id="@+id/black_and_white_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Black and White"
+                    android:textColor="@color/colorBlack"
+                    android:layout_marginLeft="@dimen/dimen_10"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/color_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/dimen_5"
+                android:layout_marginTop="@dimen/dimen_10">
+                <CheckBox
+                    android:id="@+id/color_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:text="Color"
+                    android:layout_marginLeft="@dimen/dimen_10"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
         <TextView
+            android:id="@+id/color_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONFIRM"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:layout_gravity="right"
+            android:padding="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_marginRight="@dimen/dimen_10"
+            android:layout_marginBottom="@dimen/dimen_10"/>
+        <!--<TextView
             android:id="@+id/subtext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,8 +98,8 @@
             android:paddingTop="10dp"
             android:paddingBottom="15dp"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp" />
-        <LinearLayout
+            android:paddingRight="15dp" />-->
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -68,10 +134,10 @@
                 android:layout_gravity="center"
                 android:src="@drawable/ic_plus_grey600_24dp"
                 android:background="@drawable/transparent_square_box"/>
-        </LinearLayout>
+        </LinearLayout>-->
 
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:gravity="right">
@@ -103,6 +169,6 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:id="@+id/next_button"/>
-        </LinearLayout>
+        </LinearLayout>-->
     </LinearLayout>
 </RelativeLayout>

@@ -1,11 +1,13 @@
 package com.sourceedge.preco.homescreen.controller;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Location;
 import android.location.LocationManager;
@@ -24,6 +26,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -32,7 +35,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +63,7 @@ import com.sourceedge.preco.location.controller.Locations;
 import com.sourceedge.preco.location.controller.MapsActivity;
 import com.sourceedge.preco.login.controller.Login;
 import com.sourceedge.preco.login.controller.Splash;
+import com.sourceedge.preco.myprofile.controller.MyProfile;
 import com.sourceedge.preco.payment.controller.AddPrecoPoints;
 import com.sourceedge.preco.printproperties.controller.PrintProperties;
 import com.sourceedge.preco.support.Class_Genric;
@@ -73,29 +79,31 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
+public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     Toolbar toolbar;
     DrawerLayout drawer;
     ActionBarDrawerToggle mDrawerToggle;
     CoordinatorLayout coordinatorLayout;
     ImageView print, copyScan, bookXerox, jobs;
-    RelativeLayout addPointLayout,historyLayout;
+    RelativeLayout addPointLayout, historyLayout;
     static Activity a;
     static SharedPreferences sharedPreferences;
     static Button button, button1;
     static GoogleApiClient mGoogleApiClient;
-
+    Dialog dialog;
+    CheckBox blackAndWhiteCheckbox, colorCheckbox;
+    LinearLayout blackAndWhiteColor, colorType;
+    TextView colorConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        Class_Genric.requestStorage(HomeScreen.this);
+        Class_Genric.requestCamera(HomeScreen.this);
         if (!Class_Genric.checkLocationPermission(HomeScreen.this)) {
             Class_Genric.requestPermission(HomeScreen.this);
-        } else
-            //Toast.makeText(HomeScreen.this, "Permission already granted", Toast.LENGTH_SHORT).show();
-        //turnGPSOn(HomeScreen.this);
-        //displayPromptForEnablingGPS(HomeScreen.this);
+        }
         Class_Genric.turnGPSOn(HomeScreen.this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
@@ -107,8 +115,9 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
         print = (ImageView) findViewById(R.id.print);
         copyScan = (ImageView) findViewById(R.id.copy_scan);
         bookXerox = (ImageView) findViewById(R.id.book_xerox);
-        addPointLayout=(RelativeLayout)findViewById(R.id.addpointlay);
-        historyLayout=(RelativeLayout)findViewById(R.id.historylay);
+        addPointLayout = (RelativeLayout) findViewById(R.id.addpointlay);
+        historyLayout = (RelativeLayout) findViewById(R.id.historylay);
+
         mGoogleApiClient = ((MyApplication) getApplication()).getGoogleApiClient(HomeScreen.this, this);
         OnClicks();
         Class_Genric.DrawerOnClicks(HomeScreen.this);
@@ -120,20 +129,62 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
             public void onClick(View v) {
                 //REVERT BACK
                 Class_Static.isCopyScan = false;
-                startActivity(new Intent(HomeScreen.this, Locations.class));
-                //startActivity(new Intent(HomeScreen.this, UploadFile.class));
-                //PickAndPreview.performFileSearch(HomeScreen.this);
+                dialog = new Dialog(HomeScreen.this);
+                dialog.setContentView(R.layout.dialog_copies);
+                blackAndWhiteCheckbox = (CheckBox) dialog.findViewById(R.id.black_and_white_checkbox);
+                colorCheckbox = (CheckBox) dialog.findViewById(R.id.color_checkbox);
+                blackAndWhiteColor = (LinearLayout) dialog.findViewById(R.id.black_and_white_color);
+                colorType = (LinearLayout) dialog.findViewById(R.id.color_type);
+                colorConfirm = (TextView) dialog.findViewById(R.id.color_confirm);
+                dialog.show();
+
+                blackAndWhiteColor.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        blackAndWhiteCheckbox.setChecked(true);
+                        colorCheckbox.setChecked(false);
+                    }
+                });
+
+                colorType.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        blackAndWhiteCheckbox.setChecked(false);
+                        colorCheckbox.setChecked(true);
+                    }
+                });
+
+                blackAndWhiteCheckbox.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        blackAndWhiteCheckbox.setChecked(true);
+                        colorCheckbox.setChecked(false);
+                    }
+                });
+
+                colorCheckbox.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        blackAndWhiteCheckbox.setChecked(false);
+                        colorCheckbox.setChecked(true);
+                    }
+                });
+
+                colorConfirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(HomeScreen.this, Locations.class));
+                        dialog.dismiss();
+                    }
+                });
             }
         });
 
         copyScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //REVERT BACK
-                Class_Static.isCopyScan = true;
-
+                Class_Static.isCopyScan = false;
                 startActivity(new Intent(HomeScreen.this, Scan.class));
-                //startActivity(new Intent(HomeScreen.this,UploadFile.class));
             }
         });
 
@@ -142,15 +193,13 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
             public void onClick(View v) {
                 Class_Static.isCopyScan = false;
                 startActivity(new Intent(HomeScreen.this, Copy.class));
-
             }
         });
 
         jobs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        startActivity(new Intent(HomeScreen.this, Forms.class));
-
+                startActivity(new Intent(HomeScreen.this, Forms.class));
             }
         });
 
@@ -191,7 +240,7 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
                                 }
                             });
                 } else if (Class_Static.isFacebookSignIn) {
-                    Class_Static.isFacebookSignIn=false;
+                    Class_Static.isFacebookSignIn = false;
                     LoginManager.getInstance().logOut();
                 }
                 SharedPreferences.Editor editor = sharedPreferences.edit();

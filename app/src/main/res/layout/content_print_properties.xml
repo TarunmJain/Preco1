@@ -7,42 +7,11 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.sourceedge.preco.printproperties.controller.PrintProperties"
-    tools:showIn="@layout/activity_print_properties">
-
-    <LinearLayout
-        android:id="@+id/footer"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
-       <!-- <TextView
-            android:id="@+id/edit_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="EDIT"
-            android:textColor="@color/colorAccent"
-            android:background="@color/colorGrey"
-            android:gravity="center"
-            android:padding="@dimen/dimen_15"
-            android:layout_marginRight="@dimen/dimen_1"/>-->
-
-        <TextView
-            android:id="@+id/next_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="UPDATE"
-            android:textColor="@color/colorWhite"
-            android:background="@color/colorAccent"
-            android:gravity="center"
-            android:padding="@dimen/dimen_15"/>
-
-    </LinearLayout>
+    tools:showIn="@layout/activity_print_properties"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <ScrollView
-        android:layout_above="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
@@ -51,10 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,16 +35,14 @@
                 android:layout_marginRight="@dimen/dimen_10"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:background="@drawable/transparent_square_box">
-                <TextView
-                    android:layout_toLeftOf="@+id/icon"
+                <EditText
+                    android:layout_toLeftOf="@+id/paging_icon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Full Document"
-                    android:padding="@dimen/dimen_10"
-                    android:layout_centerInParent="true"
-                    android:gravity="center_vertical"/>
+                    android:background="@android:color/transparent"
+                    android:padding="3dp"/>
                 <ImageView
-                    android:id="@+id/icon"
+                    android:id="@+id/paging_icon"
                     android:layout_width="@dimen/dimen_30"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -109,13 +73,13 @@
                     android:padding="@dimen/dimen_10"/>-->
                 <Spinner
                     android:id="@+id/paper_size_spinner"
-                    android:layout_toLeftOf="@+id/icon1"
+                    android:layout_toLeftOf="@+id/papersize_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="30dp">
 
                 </Spinner>
                 <ImageView
-                    android:id="@+id/icon1"
+                    android:id="@+id/papersize_icon"
                     android:layout_width="@dimen/dimen_30"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -144,13 +108,13 @@
                     android:padding="@dimen/dimen_10"/>-->
                 <Spinner
                     android:id="@+id/color_spinner"
-                    android:layout_toLeftOf="@+id/icon2"
+                    android:layout_toLeftOf="@+id/color_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="30dp">
 
                 </Spinner>
                 <ImageView
-                    android:id="@+id/icon2"
+                    android:id="@+id/color_icon"
                     android:layout_width="@dimen/dimen_30"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -179,13 +143,13 @@
                     android:padding="@dimen/dimen_10"/>-->
                 <Spinner
                     android:id="@+id/single_double_spinner"
-                    android:layout_toLeftOf="@+id/icon3"
+                    android:layout_toLeftOf="@+id/singledouble_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="30dp">
 
                 </Spinner>
                 <ImageView
-                    android:id="@+id/icon3"
+                    android:id="@+id/singledouble_icon"
                     android:layout_width="@dimen/dimen_30"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -200,46 +164,31 @@
                 android:padding="@dimen/dimen_10"
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:layout_marginRight="@dimen/dimen_10"/>
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/dimen_5"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
-                android:weightSum="1">
-
+                android:background="@drawable/transparent_square_box">
                 <EditText
-                    android:layout_width="0dp"
+                    android:layout_toLeftOf="@+id/pagenumber_icon"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:hint="FROM"
-                    android:gravity="center"
-                    android:textSize="@dimen/textview_14"
-                    android:padding="@dimen/dimen_15"
-                    android:background="@drawable/transparent_square_box"
-                    android:id="@+id/editText" />
-
-                <TextView
-                    android:layout_width="0dp"
+                    android:background="@android:color/transparent"
+                    android:padding="3dp"/>
+                <!--<Spinner
+                    android:id="@+id/color_spinner"
+                    android:layout_toLeftOf="@+id/icon2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">-->
+                <ImageView
+                    android:id="@+id/pagenumber_icon"
+                    android:layout_width="@dimen/dimen_30"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
-                    android:text="TO"
-                    android:gravity="center"
-                    android:padding="@dimen/dimen_10"
-                    android:textColor="@color/colorBlack"/>
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:hint="TO"
-                    android:gravity="center"
-                    android:padding="@dimen/dimen_15"
-                    android:textSize="@dimen/textview_14"
-                    android:background="@drawable/transparent_square_box"/>
-
-            </LinearLayout>
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_alert_circle_outline_grey600_24dp"/>
+            </RelativeLayout>
             <!--<RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -284,13 +233,13 @@
                     android:padding="@dimen/dimen_10"/>-->
                 <Spinner
                     android:id="@+id/paper_type_spinner"
-                    android:layout_toLeftOf="@+id/icon7"
+                    android:layout_toLeftOf="@+id/pagetype_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="30dp">
 
                 </Spinner>
                 <ImageView
-                    android:id="@+id/icon7"
+                    android:id="@+id/pagetype_icon"
                     android:layout_width="@dimen/dimen_30"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -320,19 +269,30 @@
                     android:padding="@dimen/dimen_10"/>-->
                 <Spinner
                     android:id="@+id/collated_uncollated_spinner"
-                    android:layout_toLeftOf="@+id/icon8"
+                    android:layout_toLeftOf="@+id/collateduncollated_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="30dp">
 
                 </Spinner>
                 <ImageView
-                    android:id="@+id/icon8"
+                    android:id="@+id/collateduncollated_icon"
                     android:layout_width="@dimen/dimen_30"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_alert_circle_outline_grey600_24dp"/>
             </RelativeLayout>
+            <TextView
+                android:id="@+id/next_button"
+                android:layout_width="@dimen/dimen_150"
+                android:layout_height="wrap_content"
+                android:text="UPDATE"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:padding="@dimen/dimen_15"/>
 
         </LinearLayout>
     </ScrollView>

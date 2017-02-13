@@ -12,10 +12,12 @@ import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -67,6 +69,8 @@ import com.sourceedge.preco.register.controller.PrefManager;
 import com.sourceedge.preco.register.controller.WelcomeActivity;
 import com.sourceedge.preco.support.Class_Genric;
 import com.sourceedge.preco.support.Class_Static;
+import com.sourceedge.preco.support.Class_SyncApi;
+import com.sourceedge.preco.support.GCMClientManager;
 import com.sourceedge.preco.support.MyApplication;
 
 import org.json.JSONException;
@@ -78,9 +82,13 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import static android.R.attr.data;
+import static java.security.AccessController.getContext;
 
 public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private PrefManager prefManager;
+
+    String DeviceId="";
+    String PROJECT_NUMBER="241914864311";
 
     EditText username, password;
     TextView loginButton,termsAndConditions;
@@ -103,12 +111,14 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
+        Class_Genric.NetCheck(Login.this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
+            Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.WHITE);
+            window.setStatusBarColor(getResources().getColor(android.R.color.transparent));
         }
+
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         loginButton = (TextView) findViewById(R.id.login_button);
@@ -121,11 +131,29 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
         gso = ((MyApplication) getApplication()).getGoogleSignInOptions();
         Class_Static.mGoogleApiClient = ((MyApplication) getApplication()).getGoogleApiClient(Login.this, this);
+        setDeviceId();
+    }
+
+    private void setDeviceId() {
+        DeviceId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         OnClicks();
         printHashKey();
         facebookLogin();
+        /*GCMClientManager pushClientManager = new GCMClientManager(Login.this, PROJECT_NUMBER);
+        pushClientManager.registerIfNeeded(new GCMClientManager.RegistrationCompletedHandler() {
+            @Override
+            public void onSuccess(String registrationId, boolean isNewRegistration) {
+                DeviceId = registrationId;
+                OnClicks();
+                printHashKey();
+                facebookLogin();
+            }
 
-
+            @Override
+            public void onFailure(String ex) {
+                super.onFailure(ex);
+            }
+        });*/
     }
 
     private void facebookLogin() {
@@ -143,14 +171,15 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
                                 try {
                                     Class_Static.isFacebookSignIn=true;
-                                    prefManager = new PrefManager(Login.this);
+                                    /*prefManager = new PrefManager(Login.this);
                                     if (!prefManager.isFirstTimeLaunch())
                                         startActivity(new Intent(Login.this, HomeScreen.class));
                                     else startActivity(new Intent(Login.this, WelcomeActivity.class));
                                     SharedPreferences.Editor editor=sharedPreferences.edit();
                                     editor.putString(Class_Genric.Sp_Status,"LoggedIn");
                                     editor.commit();
-                                    finish();
+                                    finish();*/
+                                    startActivity(new Intent(Login.this, Password.class));
                                     String email = object.getString("email");
                                     String birthday = object.getString("birthday");
                                     String id = object.getString("id");
@@ -188,7 +217,6 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             public void onCancel() {
 
             }
-
             @Override
             public void onError(FacebookException error) {
 
@@ -227,13 +255,15 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             Class_Static.isGoogleSignIn=true;
-            prefManager = new PrefManager(Login.this);
+            /*prefManager = new PrefManager(Login.this);
             if (!prefManager.isFirstTimeLaunch())
                 startActivity(new Intent(Login.this, HomeScreen.class));
             else startActivity(new Intent(Login.this, WelcomeActivity.class));
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putString(Class_Genric.Sp_Status,"LoggedIn");
             editor.commit();
+            finish();*/
+            startActivity(new Intent(Login.this, Password.class));
             finish();
 
            // Log.e(TAG, "display name: " + acct.getDisplayName());
@@ -281,14 +311,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             public void onClick(View v) {
                 if (!username.getText().toString().matches("")) {
                     if (!password.getText().toString().matches("")) {
-                        prefManager = new PrefManager(Login.this);
-                        if (!prefManager.isFirstTimeLaunch())
-                             startActivity(new Intent(Login.this, HomeScreen.class));
-                        else startActivity(new Intent(Login.this, WelcomeActivity.class));
-                        SharedPreferences.Editor editor=sharedPreferences.edit();
-                        editor.putString(Class_Genric.Sp_Status,"LoggedIn");
-                        editor.commit();
-                        finish();
+                        Class_SyncApi.LoginApi(Login.this,username,password,DeviceId,"android");
                     } else password.setError("Field cannot be empty");
                 } else username.setError("Field cannot be empty");
             }
@@ -298,6 +321,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, NewRegister.class));
+                finish();
             }
         });
 
@@ -390,7 +414,44 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+   /* @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (requestCode == Class_Genric.PERMISSION_REQUEST_CAMERA) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Class_Genric.requestStorage(Login.this);
+            } else {
+                //info.setText("Permission Is Mandatory. Please Clear App Data and try Again");
+                Class_Genric.requestCamera(Login.this);
+                // permission denied, boo! Disable the
+                // functionality that depends on this permission.
+            }
+            return;
+            // other 'case' lines to check for other
+            // permissions this app might request
+        } else  if (requestCode == Class_Genric.PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // checkversion(Splash.this);
+                // permission was granted, yay! Do the
+                // contacts-related task you need to do.
+
+            } else {
+                //info.setText("Permission Is Mandatory. Please Clear App Data and try Again");
+                Class_Genric.requestPermission(Login.this);
+                // permission denied, boo! Disable the
+                // functionality that depends on this permission.
+            }
+            return;
+        }
+    }*/
 }

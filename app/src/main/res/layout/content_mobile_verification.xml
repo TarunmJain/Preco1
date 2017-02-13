@@ -35,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:elevation="@dimen/dimen_10"
-            android:background="@color/colorWhite"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorPrimary"
             android:text="@string/submit_button_title"/>
 
         <TextView

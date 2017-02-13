@@ -38,11 +38,12 @@
                 android:layout_height="wrap_content"
                 android:text="Number Of Copies"
                 android:padding="@dimen/dimen_10"/>
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:padding="@dimen/dimen_15"
+                android:inputType="number"
+                android:padding="@dimen/dimen_10"
                 android:background="@drawable/transparent_square_box"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"/>

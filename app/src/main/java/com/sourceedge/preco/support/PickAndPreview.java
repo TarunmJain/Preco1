@@ -23,7 +23,7 @@ public class PickAndPreview {
         // If one wanted to search for ogg vorbis files, the type would be "audio/ogg".
         // To search for all documents available via installed storage providers,
         // it would be "*/*".
-        intent.setType("application/pdf");
+        intent.setType("*/*");
         ((Activity)context).startActivityForResult(intent, Class_Static.READ_REQUEST_CODE);
     }
 

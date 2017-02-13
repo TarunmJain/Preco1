@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/paging_popup"
+        android:title="Paging"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/papersize_popup"
+        android:title="PaperSize"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/color_popup"
+        android:title="Color"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/singledouble_popup"
+        android:title="Single/Double"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/pagenumbers_popup"
+        android:title="PageNumbers"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/pagetype_popup"
+        android:title="Page Type"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/collateduncollated_popup"
+        android:title="Collated/Uncollated"
+        android:visible="false"/>
+
+
+</menu>

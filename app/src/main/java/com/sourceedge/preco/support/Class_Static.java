@@ -14,5 +14,6 @@ public class Class_Static {
     public static boolean isCopyScan=false;
     public static boolean isGoogleSignIn=false;
     public static boolean isFacebookSignIn=false;
+    public static boolean isPdfUri=false;
     public static GoogleApiClient mGoogleApiClient;
 }

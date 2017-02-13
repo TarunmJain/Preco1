@@ -14,6 +14,7 @@
     <string name="title_password">Password</string>
     <string name="title_confirm_password">Confirm Password</string>
     <string name="title_phoneno">Phone No</string>
+    <string name="title_referal_code">Referral Code</string>
     <string name="register_now_button_title">REGISTER NOW</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
     <string name="title_print">Print</string>
@@ -79,5 +80,7 @@
     <string name="title_activity_copy">Copy</string>
 
     <string name="title_activity_scan">Scan</string>
+    <string name="title_activity_change_password">ChangePassword</string>
+    <string name="title_activity_password">Password</string>
 
 </resources>

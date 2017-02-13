@@ -48,23 +48,30 @@ public class SlotSelection extends AppCompatActivity {
         //recyclerView.setLayoutManager(new LinearLayoutManager(SlotSelection.this,LinearLayoutManager.HORIZONTAL,false));
         //recyclerView.setAdapter(new DateSelectionAdapter(SlotSelection.this));
         c = Calendar.getInstance();
-        //System.out.println("Current time => " + c.getTime());
-        df = new SimpleDateFormat("dd-MMM-yyyy");
-        formattedDate = df.format(c.getTime());
-        dateTextview.setText(formattedDate);
-        gridView.setAdapter(new SlotAdapter(this));
+        gridView.setAdapter(new SlotAdapter(this, getTimeSlots(c).getTime()));
 
         OnClicks();
     }
+
+
 
     private void OnClicks() {
         nextDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 c.add(Calendar.DATE, 1);
+                if(c.getTime().getDate()==Calendar.getInstance().getTime().getDate())
+                {
+                    c = Calendar.getInstance();
+                    gridView.setAdapter(new SlotAdapter(SlotSelection.this, getTimeSlots(c).getTime()));
+                }
+                else {
+                    c.set(Calendar.HOUR_OF_DAY, 0);
+                    c.set(Calendar.MINUTE, 0);
+                    c.set(Calendar.SECOND, 0);
+                    gridView.setAdapter(new SlotAdapter(SlotSelection.this, getTimeSlots(c).getTime()));
+                }
                 formattedDate = df.format(c.getTime());
-
-                //Log.v("NEXT DATE : ", formattedDate);
                 dateTextview .setText(formattedDate);
             }
         });
@@ -73,6 +80,18 @@ public class SlotSelection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 c.add(Calendar.DATE, -1);
+                if(c.getTime().getDate()==Calendar.getInstance().getTime().getDate())
+                {
+                    c = Calendar.getInstance();
+                    gridView.setAdapter(new SlotAdapter(SlotSelection.this, getTimeSlots(c).getTime()));
+                }
+                else {
+                    c.set(Calendar.HOUR_OF_DAY, 0);
+                    c.set(Calendar.MINUTE, 0);
+                    c.set(Calendar.SECOND, 0);
+                    gridView.setAdapter(new SlotAdapter(SlotSelection.this, getTimeSlots(c).getTime()));
+                }
+
                 formattedDate = df.format(c.getTime());
 
                 //Log.v("PREVIOUS DATE : ", formattedDate);
@@ -104,6 +123,18 @@ public class SlotSelection extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+    public Calendar getTimeSlots(Calendar c){
+        df = new SimpleDateFormat("dd-MMM-yyyy");
+        formattedDate = df.format(c.getTime());
+        dateTextview.setText(formattedDate);
+        Calendar temp= (Calendar) c.clone();
+        if(c.getTime().getMinutes()%5==0)
+            temp.add(Calendar.MINUTE, 5);
+        else
+            temp.add(Calendar.MINUTE, 5-(c.getTime().getMinutes()%5));
+        Calendar finalCalender = temp;
+        return finalCalender;
     }
 
 }

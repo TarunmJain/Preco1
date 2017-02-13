@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorWhite" >
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<FrameLayout
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:paddingBottom="@dimen/dimen_1"
+    android:layout_height="wrap_content">
+    <TextView
+        android:background="@color/colorWhite"
+        android:id="@+id/printername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/dimen_10"
+        android:textColor="@color/colorPrimary"/>
+</FrameLayout>
+
+    <LinearLayout
+        android:padding="@dimen/dimen_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="@color/colorBlack"
+            android:layout_width="wrap_content"
+            android:text="Operator "
+            android:layout_marginRight="@dimen/dimen_5"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_gravity="right"
+            android:id="@+id/operator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="@dimen/dimen_2"
+            android:textColor="@color/colorBlack"/>
+    </LinearLayout>
+    <LinearLayout
+        android:padding="@dimen/dimen_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:text="Paper Type "
+            android:layout_marginRight="@dimen/dimen_5"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_gravity="right"
+            android:id="@+id/printeroption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="@dimen/dimen_2"
+            android:textColor="@color/colorBlack"/>
+    </LinearLayout>
+    <LinearLayout
+        android:padding="@dimen/dimen_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="@color/colorBlack"
+            android:layout_width="wrap_content"
+            android:text="Color Type "
+            android:layout_marginRight="@dimen/dimen_5"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_gravity="right"
+            android:id="@+id/printercolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="@dimen/dimen_2"
+            android:textColor="@color/colorBlack"/>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="right"
+        android:padding="@dimen/dimen_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="right"
+            android:padding="@dimen/dimen_10"
+            android:layout_height="wrap_content"
+            android:text="NEXT"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:layout_width="match_parent" />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+
+
+
+</LinearLayout>

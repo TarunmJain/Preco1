@@ -1,21 +1,35 @@
 package com.sourceedge.preco.viewer.controller;
 
+import android.Manifest;
+import android.accounts.AccountManager;
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,14 +39,26 @@ import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnPageScrollListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.http.FileContent;
+import com.google.api.client.util.ExponentialBackOff;
+import com.google.api.services.drive.DriveScopes;
 import com.sourceedge.preco.R;
 import com.sourceedge.preco.payment.controller.Payments;
 import com.sourceedge.preco.printproperties.controller.PrintProperties;
 import com.sourceedge.preco.support.Class_Genric;
+import com.sourceedge.preco.support.Class_Static;
 import com.sourceedge.preco.timeslots.controller.SlotSelection;
 import com.sourceedge.preco.uploadfile.controller.UploadFile;
 
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
+
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class PdfViewer extends AppCompatActivity implements OnPageChangeListener,OnPageScrollListener {
     static PDFView pdfView;
@@ -43,6 +69,8 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
     ImageView incrementCopies,decrementCopies;
     TextView copies;
     Integer pageNumber = 0;
+
+
 
 
     @Override
@@ -63,43 +91,43 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
         pdfView.useBestQuality(true);
         context= PdfViewer.this;
         Class_Genric.ShowDialog(PdfViewer.this,"Please Wait...",true);
-        pdfView.fromUri(UploadFile.userPickedUri)
-                .defaultPage(0)
-                .onPageChange(this)
-                .swipeHorizontal(true)
-                .enableDoubletap(false)
-                .onPageScroll(this)
-                .onLoad(new OnLoadCompleteListener() {
-                    @Override
-                    public void loadComplete(int nbPages) {
-                        Class_Genric.ShowDialog(context,"Please Wait...",false);
-                        //Toast.makeText(PdfActivity.this, String.valueOf(nbPages), Toast.LENGTH_LONG).show();
-                    }
-                }).load();
+        if(Class_Static.isPdfUri){
+            pdfView.fromUri(UploadFile.userPickedUri)
+                    .defaultPage(0)
+                    .onPageChange(this)
+                    .swipeHorizontal(true)
+                    .enableDoubletap(false)
+                    .onPageScroll(this)
+                    .onLoad(new OnLoadCompleteListener() {
+                        @Override
+                        public void loadComplete(int nbPages) {
+                            Class_Genric.ShowDialog(context,"Please Wait...",false);
+                            //Toast.makeText(PdfActivity.this, String.valueOf(nbPages), Toast.LENGTH_LONG).show();
+                        }
+                    }).load();
+        }else {
+            pdfView.fromStream(UploadFile.inputstream)
+                    .defaultPage(0)
+                    .onPageChange(this)
+                    .swipeHorizontal(true)
+                    .enableDoubletap(false)
+                    .onPageScroll(this)
+                    .onLoad(new OnLoadCompleteListener() {
+                        @Override
+                        public void loadComplete(int nbPages) {
+                            Class_Genric.ShowDialog(context,"Please Wait...",false);
+                            //Toast.makeText(PdfActivity.this, String.valueOf(nbPages), Toast.LENGTH_LONG).show();
+                        }
+                    }).load();
+        }
+
         //new DownloadImageTask().execute("");
 
         OnClicks();
     }
 
-    public String getFileName(Uri uri) {
-        String result = null;
-        if (UploadFile.userPickedUri.getScheme().equals("content")) {
-            Cursor cursor = getContentResolver().query(UploadFile.userPickedUri, null, null, null, null);
-            try {
-                if (cursor != null && cursor.moveToFirst()) {
-                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-                }
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
-        }
-        if (result == null) {
-            result = UploadFile.userPickedUri.getLastPathSegment();
-        }
-        return result;
-    }
+
+
 
     public static void Continue(){
         pdfView.fromStream(input)
@@ -119,6 +147,7 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Class_Static.isPdfUri=false;
                 startActivity(new Intent(PdfViewer.this, SlotSelection.class));
             }
         });
@@ -128,6 +157,13 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
             public void onClick(View v) {
                 startActivity(new Intent(PdfViewer.this, PrintProperties.class));
                 finish();
+            }
+        });
+
+        copies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                copies.setCursorVisible(true);
             }
         });
 
@@ -175,6 +211,7 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Class_Static.isPdfUri=false;
         finish();
     }
 
@@ -189,6 +226,8 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
     public void onPageScrolled(int page, float positionOffset) {
 
     }
+
+
 }
 
 

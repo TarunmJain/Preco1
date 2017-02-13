@@ -24,7 +24,7 @@ public class AddPrecoPoints extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_preco_points);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Add Points");
+        toolbar.setTitle("Promo Code");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         couponCode=(EditText)findViewById(R.id.coupon_code);

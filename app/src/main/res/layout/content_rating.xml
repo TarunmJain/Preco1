@@ -9,7 +9,7 @@
     tools:context="com.sourceedge.preco.summary.controller.Rating"
     tools:showIn="@layout/activity_rating">
     <LinearLayout
-        android:layout_above="@+id/submit"
+        android:layout_above="@+id/rating_submit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

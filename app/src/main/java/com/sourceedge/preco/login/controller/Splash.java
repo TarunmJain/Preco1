@@ -2,6 +2,7 @@ package com.sourceedge.preco.login.controller;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -27,7 +28,6 @@ import com.sourceedge.preco.support.FeedData;
 public class Splash extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     static ProgressBar progressBar;
     static SharedPreferences sharedPreferences;
-    ImageView logo;
     public static final int SPLASH_DISPLAY_LENGTH = 1000;
 
 
@@ -36,6 +36,9 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        Class_Genric.NetCheck(Splash.this);
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -51,6 +54,7 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 if (sharedPreferences.getString(Class_Genric.Sp_Status, "").matches("LoggedIn")) {
                     startActivity(new Intent(Splash.this, HomeScreen.class));
                 } else {
@@ -61,6 +65,8 @@ public class Splash extends AppCompatActivity implements GoogleApiClient.OnConne
             }
         }, SPLASH_DISPLAY_LENGTH);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

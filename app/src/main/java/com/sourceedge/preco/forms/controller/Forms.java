@@ -38,6 +38,7 @@ public class Forms extends AppCompatActivity {
         forms.add("Leave Form");
         forms.add("Hostel Changing Form");
         forms.add("Custom Form");
+        forms.add("A4 Form");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, forms);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         formSpinner.setAdapter(dataAdapter);

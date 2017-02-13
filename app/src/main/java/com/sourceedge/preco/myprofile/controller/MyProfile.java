@@ -41,9 +41,9 @@ import java.io.OutputStream;
 
 public class MyProfile extends AppCompatActivity {
     Toolbar toolbar;
-    EditText myprofileName,myprofileEmailid,myprofilePassword,myprofileAge,myprofileGender,myprofilePhoneno,myprofileDept,myprofileYear;
+    EditText myprofileName,myprofileEmailid,myprofileAge,myprofileGender,myprofilePhoneno,myprofileDept,myprofileYear;
     Button buttonSave;
-    TextView selectImage;
+    TextView selectImage,changePassword,myprofilePassword;
     ImageView profilePic;
     String imagestr;
     static String imageEncoded;
@@ -58,22 +58,38 @@ public class MyProfile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         myprofileName=(EditText)findViewById(R.id.myprofile_name);
         myprofileEmailid=(EditText)findViewById(R.id.myprofile_emailid);
-        myprofilePassword=(EditText)findViewById(R.id.myprofile_password);
+        myprofilePassword=(TextView)findViewById(R.id.myprofile_password);
         myprofileAge=(EditText)findViewById(R.id.myprofile_age);
         myprofileGender=(EditText)findViewById(R.id.myprofile_gender);
         myprofilePhoneno=(EditText)findViewById(R.id.myprofile_phoneno);
         myprofileDept=(EditText)findViewById(R.id.myprofile_dept);
         myprofileYear=(EditText)findViewById(R.id.myprofile_year);
         buttonSave=(Button)findViewById(R.id.button_save);
+        changePassword=(TextView)findViewById(R.id.change_password);
         selectImage=(TextView)findViewById(R.id.select_image);
         profilePic=(ImageView)findViewById(R.id.profile_pic);
         OnClicks();
     }
 
     private void OnClicks() {
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MyProfile.this,ChangePassword.class));
+            }
+        });
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!myprofileName.getText().toString().matches("")) {
+                    if (!myprofileEmailid.getText().toString().matches("")) {
+                        if (!myprofilePassword.getText().toString().matches("")) {
+                            if (!myprofilePhoneno.getText().toString().matches("")) {
+
+                            }else myprofilePhoneno.setError("Field cannot be empty");
+                        }else myprofilePassword.setError("Field cannot be empty");
+                    }else myprofileEmailid.setError("Field cannot be empty");
+                }else myprofileName.setError("Field cannot be empty");
                 finish();
             }
         });

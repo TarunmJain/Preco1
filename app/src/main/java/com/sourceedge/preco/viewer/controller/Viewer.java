@@ -63,7 +63,7 @@ public class Viewer extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Viewer.this, Payments.class));
+                startActivity(new Intent(Viewer.this, SlotSelection.class));
             }
         });
 

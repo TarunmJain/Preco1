@@ -17,13 +17,19 @@ public class ModelPrinters {
     String Address;
     String Distance;
     String status;
+    String PaperType;
+    String ColorType;
+    boolean Operator;
 
-    public ModelPrinters(String title, MarkerOptions markerlocation,String address,String distance){
+    public ModelPrinters(String title,String paperType,String colorType,boolean operator, MarkerOptions markerlocation,String address,String distance){
         Title=title;
         marker=markerlocation;
         Address=address;
         Distance=distance;
         status="";
+        PaperType=paperType;
+        ColorType=colorType;
+        Operator=operator;
     }
 
     public ModelPrinters(String title, LatLng position){
@@ -77,5 +83,29 @@ public class ModelPrinters {
 
     public void setTitle(String title) {
         Title = title;
+    }
+
+    public String getPaperType() {
+        return PaperType;
+    }
+
+    public void setPaperType(String paperType) {
+        PaperType = paperType;
+    }
+
+    public String getColorType() {
+        return ColorType;
+    }
+
+    public void setColorType(String colorType) {
+        ColorType = colorType;
+    }
+
+    public boolean isOperator() {
+        return Operator;
+    }
+
+    public void setOperator(boolean operator) {
+        Operator = operator;
     }
 }

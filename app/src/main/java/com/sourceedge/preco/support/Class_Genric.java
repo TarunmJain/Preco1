@@ -5,18 +5,23 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -26,10 +31,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -52,6 +60,10 @@ import com.sourceedge.preco.homescreen.controller.HomeScreen;
 import com.sourceedge.preco.login.controller.Login;
 import com.sourceedge.preco.myprofile.controller.MyProfile;
 import com.sourceedge.preco.pricinginfo.controller.PricingInfo;
+import com.sourceedge.preco.printproperties.controller.PrintProperties;
+import com.sourceedge.preco.support.models.KeyValuePair;
+
+import java.util.ArrayList;
 
 import static android.support.v4.app.ActivityCompat.requestPermissions;
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -63,23 +75,24 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class Class_Genric {
     public static final String MyPref = "MyPref";
     public static final String Sp_Status = "Status";
+    public static final String Sp_Token = "Token";
+    public static final String Sp_Balance = "Balance";
     public static final String Sp_Image = "Image";
     public static final String Sp_Pdf = "Pdf";
     public static boolean progressAlive = false;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
-    private static final int PERMISSION_REQUEST_CODE = 1;
-    public static final int PERMISSION_REQUEST_CAMERA=1;
-    public static final int PERMISSION_REQUEST_STORAGE=1;
-
+    public static final int PERMISSION_REQUEST_CODE = 1;
+    public static final int PERMISSION_REQUEST_CAMERA = 1;
+    public static final int PERMISSION_REQUEST_STORAGE = 1;
 
 
     static ProgressDialog pDialog;
     static Activity a;
+    public static PopupMenu popup;
+    public static Menu popupMenu;
     static SharedPreferences sharedPreferences;
-    static Button button,button1;
     static DrawerLayout drawer;
-    static LinearLayout notification,pricingInfo,profile,faqs,helpSupport,logout;
-    static Double distance=0.0;
+    static LinearLayout notification, pricingInfo, profile, faqs, helpSupport, logout;
 
 
     public static void setupDrawer(Toolbar toolbar, DrawerLayout drawer, ActionBarDrawerToggle mDrawerToggle, Context mContext) {
@@ -88,6 +101,7 @@ public class Class_Genric {
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
             }
+
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -97,18 +111,18 @@ public class Class_Genric {
         mDrawerToggle.syncState();
     }
 
-    public static void DrawerOnClicks(Context context){
+    public static void DrawerOnClicks(Context context) {
         a = (Activity) context;
         sharedPreferences = a.getSharedPreferences(MyPref, a.MODE_PRIVATE);
         drawer = (DrawerLayout) a.findViewById(R.id.navigation_drawer);
 
 
-        notification=(LinearLayout)a.findViewById(R.id.notification);
-        pricingInfo=(LinearLayout)a.findViewById(R.id.pricing_info);
-        profile=(LinearLayout)a.findViewById(R.id.profile);
-        faqs=(LinearLayout)a.findViewById(R.id.faqs);
-        helpSupport=(LinearLayout)a.findViewById(R.id.helps_support);
-        logout=(LinearLayout)a.findViewById(R.id.logout);
+        notification = (LinearLayout) a.findViewById(R.id.notification);
+        pricingInfo = (LinearLayout) a.findViewById(R.id.pricing_info);
+        profile = (LinearLayout) a.findViewById(R.id.profile);
+        faqs = (LinearLayout) a.findViewById(R.id.faqs);
+        helpSupport = (LinearLayout) a.findViewById(R.id.helps_support);
+        logout = (LinearLayout) a.findViewById(R.id.logout);
 
         OnClicks(a);
     }
@@ -166,19 +180,22 @@ public class Class_Genric {
                 pDialog.cancel();
                 progressAlive = false;
             }
-            {
+
                /* pDialog=new Dialog(context);
                 pDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 pDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 pDialog.setContentView(R.layout.customload);*/
 
                 pDialog = new ProgressDialog(context);
+                //pDialog.setCancelable(false);
                 pDialog.setMessage(message);
                 if (message.contains("Loading"))
                     pDialog.setCanceledOnTouchOutside(false);
+                if (message.contains("Please Wait..."))
+                    pDialog.setCanceledOnTouchOutside(false);
                 progressAlive = true;
                 pDialog.show();
-            }
+
         } else {
             if (progressAlive) {
                 pDialog.dismiss();
@@ -188,11 +205,51 @@ public class Class_Genric {
         }
     }
 
+    public static String generateUrl(String Url, ArrayList<KeyValuePair> params) {
+        if (params.size() > 0) {
+            Url += "?";
+            for (KeyValuePair data : params) {
+                if (data.getKey().trim().length() > 0)
+                    Url += data.getKey() + "=" + data.getValue() + "&&";
+            }
+            Url = Url.substring(0, Url.length() - 2);
+        }
+        return Url;
+    }
+
     public static boolean NetAvailable(final Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         final boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         return isConnected;
+    }
+
+    public static boolean NetCheck(final Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        final boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if (isConnected == false) {
+            /*Toast.makeText(context, "Please Check Internet Connectivity", Toast.LENGTH_LONG).show();
+            return false;*/
+            try {
+                final Dialog dialog = new Dialog(context);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.checkinternet);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+                Button btn = (Button) dialog.findViewById(R.id.btn);
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                        NetCheck(context);
+                    }
+                });
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        }
+        return true;
     }
 
     public static int convertDpToPixels(float dp, Context context) {
@@ -236,28 +293,23 @@ public class Class_Genric {
     }*/
 
 
-
-
-    public static boolean checkPassword(String password){
+    public static boolean checkPassword(String password) {
         int length;
         length = password.length();
-        if (length < 6 || length > 11){
+        if (length < 6 || length > 11) {
             return false;
         }
-        for (int i = 0; i < password.length();i++){
+        for (int i = 0; i < password.length(); i++) {
             if (!Character.isLetter(password.charAt(i)))
                 return false;
         }
         return true;
     }
 
-    public boolean checkPassWordAndConfirmPassword(String password,String confirmPassword)
-    {
+    public static boolean checkPassWordAndConfirmPassword(String password, String confirmPassword) {
         boolean pstatus = false;
-        if (confirmPassword != null && password != null)
-        {
-            if (password.equals(confirmPassword))
-            {
+        if (confirmPassword != null && password != null) {
+            if (password.equals(confirmPassword)) {
                 pstatus = true;
             }
         }
@@ -265,11 +317,9 @@ public class Class_Genric {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public static boolean checkPermission(final Context context)
-    {
+    public static boolean checkPermission(final Context context) {
         int currentAPIVersion = Build.VERSION.SDK_INT;
-        if(currentAPIVersion>=android.os.Build.VERSION_CODES.M)
-        {
+        if (currentAPIVersion >= android.os.Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
@@ -298,9 +348,9 @@ public class Class_Genric {
     }
 
 
-    public static boolean checkLocationPermission(Context context){
+    public static boolean checkLocationPermission(Context context) {
         int result = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
-        if (result == PackageManager.PERMISSION_GRANTED){
+        if (result == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {
             return false;
@@ -329,7 +379,7 @@ public class Class_Genric {
                         context.startActivity(intent);
                     }
                 })
-                .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                         turnGPSOn(context);
@@ -337,16 +387,17 @@ public class Class_Genric {
                 }).show();
     }
 
-    public static void turnGPSOn(Context context){
+    public static void turnGPSOn(Context context) {
         String provider = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-        if(!provider.contains("gps")){
+        if (!provider.contains("gps")) {
             askUserToOpenGPS(context);
         }
     }
+
     // Method to turn off the GPS
-    public void turnGPSOff(Context context){
+    public void turnGPSOff(Context context) {
         String provider = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-        if(provider.contains("gps")){ //if gps is enabled
+        if (provider.contains("gps")) { //if gps is enabled
             final Intent poke = new Intent();
             poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
             poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
@@ -389,6 +440,7 @@ public class Class_Genric {
             Class_Genric.requestStorage(context);
         }
     }
+
     public static void requestStorage(Context context) {
 
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -398,5 +450,173 @@ public class Class_Genric {
                 requestPermissions((Activity) context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_STORAGE);
             }
         }
+    }
+
+    public static String getPath(final Context context, final Uri uri) {
+
+        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+
+        // DocumentProvider
+        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+            // ExternalStorageProvider
+            if (isExternalStorageDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+                String storageDefinition;
+
+                if ("primary".equalsIgnoreCase(type)) {
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                } else {
+                    //return System.getenv(storageDefinition) + "/" + split[1];
+                    return "/storage" + "/" + split[0] + "/" + split[1];
+                    // TODO handle non-primary volumes
+                }
+            }
+            // DownloadsProvider
+            else if (isDownloadsDocument(uri)) {
+
+                final String id = DocumentsContract.getDocumentId(uri);
+                final Uri contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                return getDataColumn(context, contentUri, null, null);
+            }
+            // MediaProvider
+            else if (isMediaDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                Uri contentUri = null;
+                if ("image".equals(type)) {
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+
+                final String selection = "_id=?";
+                final String[] selectionArgs = new String[]{
+                        split[1]
+                };
+
+                return getDataColumn(context, contentUri, selection, selectionArgs);
+            }
+        }
+        // MediaStore (and general)
+        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+            return getDataColumn(context, uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the value of the data column for this Uri. This is useful for
+     * MediaStore Uris, and other file-based ContentProviders.
+     *
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
+     * @param selectionArgs (Optional) Selection arguments used in the query.
+     * @return The value of the _data column, which is typically a file path.
+     */
+    public static String getDataColumn(Context context, Uri uri, String selection,
+                                       String[] selectionArgs) {
+
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {
+                column
+        };
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+
+    public static void PopupMenu(Context context, View v, int i) {
+        popup = new PopupMenu(context, v);
+        //Inflating the Popup using xml file
+        popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+        popupMenu = popup.getMenu();
+        switch (i) {
+            case 1:
+                popupMenu.findItem(R.id.paging_popup).setVisible(true);
+                break;
+            case 2:
+                popupMenu.findItem(R.id.papersize_popup).setVisible(true);
+                break;
+            case 3:
+                popupMenu.findItem(R.id.color_popup).setVisible(true);
+                break;
+            case 4:
+                popupMenu.findItem(R.id.singledouble_popup).setVisible(true);
+                break;
+            case 5:
+                popupMenu.findItem(R.id.pagenumbers_popup).setVisible(true);
+                break;
+            case 6:
+                popupMenu.findItem(R.id.pagetype_popup).setVisible(true);
+                break;
+            case 7:
+                popupMenu.findItem(R.id.collateduncollated_popup).setVisible(true);
+                break;
+        }
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                popup.dismiss();
+                return true;
+            }
+        });
+        popup.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                popup.dismiss();
+            }
+        });
+        popup.show();
     }
 }
