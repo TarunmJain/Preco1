@@ -105,7 +105,7 @@ import java.util.List;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrintFinishCallback,EasyPermissions.PermissionCallbacks {
+public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrintFinishCallback, EasyPermissions.PermissionCallbacks {
     Toolbar toolbar;
     LinearLayout selectimage, selectdoc, clickimage;
     SharedPreferences sharedPreferences;
@@ -166,7 +166,7 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(UploadFile.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     PickAndPreview.performFileSearch(UploadFile.this);
-                }else Class_Genric.requestStorage(UploadFile.this);
+                } else Class_Genric.requestStorage(UploadFile.this);
             }
         });
 
@@ -225,13 +225,13 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
                         }
 
                         String path1 = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
-                        userPickedUri=Uri.parse(path1);
+                        userPickedUri = Uri.parse(path1);
                         mimeType = getContentResolver().getType(userPickedUri);
                         Cursor returnCursor = getContentResolver().query(userPickedUri, null, null, null, null);
                         int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
                         returnCursor.moveToFirst();
                         filename = returnCursor.getString(nameIndex);
-                        Class_Genric.ShowDialog(UploadFile.this,"Please Wait...",true);
+                        Class_Genric.ShowDialog(UploadFile.this, "Please Wait...", true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -240,7 +240,7 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
                 case REQUEST_SELECT_IMAGE:
                     Class_Static.ispdf = false;
                     Uri selectedImage = data.getData();
-                    userPickedUri=data.getData();
+                    userPickedUri = data.getData();
                     mimeType = getContentResolver().getType(userPickedUri);
                     Cursor returnCursor = getContentResolver().query(userPickedUri, null, null, null, null);
                     int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
@@ -266,14 +266,14 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
                         filename = returnCursor1.getString(nameIndex1);
                         //new File(userPickedUri.getPath());
                         //File myFile = new File(userPickedUri.getPath());
-                        SharedPreferences.Editor edit=sharedPreferences.edit();
+                        SharedPreferences.Editor edit = sharedPreferences.edit();
                         edit.putString(Class_Genric.Sp_Pdf, userPickedUri.getPath());
                         edit.commit();
                     }
-                    if(mimeType.matches("application/pdf")){
-                        Class_Static.isPdfUri=true;
+                    if (mimeType.matches("application/pdf")) {
+                        Class_Static.isPdfUri = true;
                         startActivity(new Intent(UploadFile.this, PdfViewer.class));
-                    }else getResultsFromApi();
+                    } else getResultsFromApi();
                     break;
                 default:
                     super.onActivityResult(requestCode, resultCode, data);
@@ -283,8 +283,9 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
     }
 
     private void getResultsFromApi() {
-            new MakeRequestTask(mCredential).execute();
+        new MakeRequestTask(mCredential).execute();
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
@@ -408,25 +409,25 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
 
         @Override
         protected void onPreExecute() {
-            Class_Genric.ShowDialog(UploadFile.this,"Please Wait...",true);
+            Class_Genric.ShowDialog(UploadFile.this, "Please Wait...", true);
         }
 
         @Override
         protected void onPostExecute(InputStream output) {
-            Class_Genric.ShowDialog(UploadFile.this,"Please Wait...",false);
+            Class_Genric.ShowDialog(UploadFile.this, "Please Wait...", false);
             //Toast.makeText(MainActivity.this,output,Toast.LENGTH_SHORT).show();
             if (output == null) {
-               //mOutputText.setText("No results returned.");
+                //mOutputText.setText("No results returned.");
             } else {
-                Class_Static.isPdfUri=false;
-                inputstream=output;
-                startActivity(new Intent(UploadFile.this,PdfViewer.class));
+                Class_Static.isPdfUri = false;
+                inputstream = output;
+                startActivity(new Intent(UploadFile.this, PdfViewer.class));
             }
         }
 
         @Override
         protected void onCancelled() {
-            Class_Genric.ShowDialog(UploadFile.this,"Please Wait...",false);
+            Class_Genric.ShowDialog(UploadFile.this, "Please Wait...", false);
             if (mLastError != null) {
                 if (mLastError instanceof GooglePlayServicesAvailabilityIOException) {
                     showGooglePlayServicesAvailabilityErrorDialog(
@@ -437,13 +438,13 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
                             ((UserRecoverableAuthIOException) mLastError).getIntent(),
                             UploadFile.REQUEST_AUTHORIZATION);
                 } else {
-                    Log.d("Error",mLastError.getMessage());
+                    Log.d("Error", mLastError.getMessage());
                    /* mOutputText.setText("The following error occurred:\n"
                             + mLastError.getMessage());*/
                 }
             } else {
-                Log.d("Error","Request cancelled.");
-               // mOutputText.setText("Request cancelled.");
+                Log.d("Error", "Request cancelled.");
+                // mOutputText.setText("Request cancelled.");
             }
         }
     }

@@ -119,7 +119,7 @@ public class Class_SyncApi {
         queue.add(postRequest);
     }
 
-    public static void ExternalLoginApi(final Context context, final EditText username, final EditText password, String deviceid, String os,String type) {
+    public static void ExternalLoginApi(final Context context, final EditText username, final EditText password, String deviceid, String os, String type) {
         sharedPreferences = context.getSharedPreferences(Class_Genric.MyPref, context.MODE_PRIVATE);
         RequestQueue queue = Volley.newRequestQueue(context);
         ArrayList<KeyValuePair> params = new ArrayList<KeyValuePair>();
@@ -188,7 +188,7 @@ public class Class_SyncApi {
         queue.add(postRequest);
     }
 
-    public static void SignUpApi(final Context context, final EditText emailid, final EditText password, EditText phoneno, String deviceid,String os,String referralcode) {
+    public static void SignUpApi(final Context context, final EditText emailid, final EditText password, EditText phoneno, String deviceid, String os, String referralcode) {
         sharedPreferences = context.getSharedPreferences(Class_Genric.MyPref, context.MODE_PRIVATE);
         RequestQueue queue = Volley.newRequestQueue(context);
         ArrayList<KeyValuePair> params = new ArrayList<KeyValuePair>();
@@ -326,14 +326,14 @@ public class Class_SyncApi {
         queue.add(postRequest);
     }
 
-    public static void GetLocationApi(final Context context,String serviceid,Double lat,Double longitude) {
+    public static void GetLocationApi(final Context context, String serviceid, Double lat, Double longitude) {
         sharedPreferences = context.getSharedPreferences(Class_Genric.MyPref, context.MODE_PRIVATE);
 
         RequestQueue queue = Volley.newRequestQueue(context);
         ArrayList<KeyValuePair> params = new ArrayList<KeyValuePair>();
         params.add(new KeyValuePair("ServiceId", serviceid));
-        params.add(new KeyValuePair("Latitude", lat+""));
-        params.add(new KeyValuePair("Longitude", longitude+""));
+        params.add(new KeyValuePair("Latitude", lat + ""));
+        params.add(new KeyValuePair("Longitude", longitude + ""));
         Class_Genric.ShowDialog(context, "Loading...", true);
         StringRequest postRequest = new StringRequest(Request.Method.GET, Class_Genric.generateUrl(Class_Urls.GetLocation, params), new Response.Listener<String>() {
             @Override
@@ -345,7 +345,8 @@ public class Class_SyncApi {
                             ArrayList<Locations> locations = new ArrayList<Locations>();
                             gson = new Gson();
                             JSONArray jsonObject = new JSONArray(response);
-                            Type listtype = new TypeToken<ArrayList<Locations>>() {}.getType();
+                            Type listtype = new TypeToken<ArrayList<Locations>>() {
+                            }.getType();
                             locations = gson.fromJson(jsonObject.toString(), listtype);
                             Class_Model_DB.setLocationlist(locations);
                             break;
@@ -382,6 +383,7 @@ public class Class_SyncApi {
                 params.put("Authorization", "Bearer " + sharedPreferences.getString(Class_Genric.Sp_Token, ""));
                 return params;
             }
+
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
                 mStatusCode = response.statusCode;
@@ -391,7 +393,7 @@ public class Class_SyncApi {
         queue.add(postRequest);
     }
 
-    public static void GetLocationDevicesApi(final Context context,String serviceid,String locationid) {
+    public static void GetLocationDevicesApi(final Context context, String serviceid, String locationid) {
         sharedPreferences = context.getSharedPreferences(Class_Genric.MyPref, context.MODE_PRIVATE);
 
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -409,7 +411,8 @@ public class Class_SyncApi {
                             ArrayList<LocationDevices> locationDevices = new ArrayList<LocationDevices>();
                             gson = new Gson();
                             JSONArray jsonObject = new JSONArray(response);
-                            Type listtype = new TypeToken<ArrayList<LocationDevices>>() {}.getType();
+                            Type listtype = new TypeToken<ArrayList<LocationDevices>>() {
+                            }.getType();
                             locationDevices = gson.fromJson(jsonObject.toString(), listtype);
                             Class_Model_DB.setLocationDevicesList(locationDevices);
                             break;
@@ -446,6 +449,7 @@ public class Class_SyncApi {
                 params.put("Authorization", "Bearer " + sharedPreferences.getString(Class_Genric.Sp_Token, ""));
                 return params;
             }
+
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
                 mStatusCode = response.statusCode;
@@ -455,7 +459,7 @@ public class Class_SyncApi {
         queue.add(postRequest);
     }
 
-    public static void GetServiceOptionsApi(final Context context,String serviceid,String locationid) {
+    public static void GetServiceOptionsApi(final Context context, String serviceid, String locationid) {
         sharedPreferences = context.getSharedPreferences(Class_Genric.MyPref, context.MODE_PRIVATE);
 
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -473,7 +477,8 @@ public class Class_SyncApi {
                             ArrayList<ServiceOptions> serviceOptions = new ArrayList<ServiceOptions>();
                             gson = new Gson();
                             JSONArray jsonObject = new JSONArray(response);
-                            Type listtype = new TypeToken<ArrayList<ServiceOptions>>() {}.getType();
+                            Type listtype = new TypeToken<ArrayList<ServiceOptions>>() {
+                            }.getType();
                             serviceOptions = gson.fromJson(jsonObject.toString(), listtype);
                             Class_Model_DB.setServiceOptionsList(serviceOptions);
                             break;
@@ -510,6 +515,7 @@ public class Class_SyncApi {
                 params.put("Authorization", "Bearer " + sharedPreferences.getString(Class_Genric.Sp_Token, ""));
                 return params;
             }
+
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
                 mStatusCode = response.statusCode;
@@ -519,19 +525,19 @@ public class Class_SyncApi {
         queue.add(postRequest);
     }
 
-    public static void GetPriceApi(final Context context,String serviceid,String locationid,String deviceid,String time,String units,String qty,String couponcode,ArrayList<Options> options) {
+    public static void GetPriceApi(final Context context, String serviceid, String locationid, String deviceid, String time, String units, String qty, String couponcode, ArrayList<Options> options) {
         sharedPreferences = context.getSharedPreferences(Class_Genric.MyPref, context.MODE_PRIVATE);
 
         RequestQueue queue = Volley.newRequestQueue(context);
         ArrayList<Options> option = new ArrayList<Options>();
 
-        for(int i=0;i<options.size();i++){
-            Options opt=new Options();
+        for (int i = 0; i < options.size(); i++) {
+            Options opt = new Options();
             opt.setId(options.get(i).getId());
             opt.setSelectedOption(option.get(i).getSelectedOption());
             option.add(opt);
         }
-        SubmitOrder submitOrder=new SubmitOrder();
+        SubmitOrder submitOrder = new SubmitOrder();
         submitOrder.setServiceId(serviceid);
         submitOrder.setDeviceId(deviceid);
         submitOrder.setLocationId(locationid);
@@ -548,13 +554,13 @@ public class Class_SyncApi {
             e.printStackTrace();
         }
         Class_Genric.ShowDialog(context, "Loading...", true);
-        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, Class_Urls.GetPrice, jsonObject,new Response.Listener<JSONObject>() {
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, Class_Urls.GetPrice, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Class_Genric.ShowDialog(context, "Loading...", false);
                 switch (mStatusCode) {
                     case 200:
-                        Double price= Double.valueOf(response.optString("Price"));
+                        Double price = Double.valueOf(response.optString("Price"));
                         break;
                 }
             }
@@ -586,6 +592,7 @@ public class Class_SyncApi {
                 params.put("Authorization", "Bearer " + sharedPreferences.getString(Class_Genric.Sp_Token, ""));
                 return params;
             }
+
             @Override
             protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
                 mStatusCode = response.statusCode;
@@ -594,4 +601,83 @@ public class Class_SyncApi {
         };
         queue.add(postRequest);
     }
+
+    public static void SubmitOrderApi(final Context context, String serviceid, String locationid, String deviceid, String time, String units, String qty, String couponcode, String fileid, ArrayList<Options> options) {
+        sharedPreferences = context.getSharedPreferences(Class_Genric.MyPref, context.MODE_PRIVATE);
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        ArrayList<Options> option = new ArrayList<Options>();
+
+        for (int i = 0; i < options.size(); i++) {
+            Options opt = new Options();
+            opt.setId(options.get(i).getId());
+            opt.setSelectedOption(option.get(i).getSelectedOption());
+            option.add(opt);
+        }
+        SubmitOrder submitOrder = new SubmitOrder();
+        submitOrder.setServiceId(serviceid);
+        submitOrder.setDeviceId(deviceid);
+        submitOrder.setLocationId(locationid);
+        submitOrder.setTime(time);
+        submitOrder.setUnits(units);
+        submitOrder.setQty(qty);
+        submitOrder.setCouponCode(couponcode);
+        submitOrder.setFileId(fileid);
+        submitOrder.setOptions(option);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject = new JSONObject(gson.toJson(submitOrder));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Class_Genric.ShowDialog(context, "Loading...", true);
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, Class_Urls.SubmitOrder, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Class_Genric.ShowDialog(context, "Loading...", false);
+                switch (mStatusCode) {
+                    case 200:
+                        String jobOrderNo = response.optString("JobOrderNo");
+                        break;
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Class_Genric.ShowDialog(context, "Loading...", false);
+                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Class_Genric.NetCheck(context);
+                } else {
+                    if (error != null && error.networkResponse != null) {
+                        mStatusCode = error.networkResponse.statusCode;
+                        switch (mStatusCode) {
+                            case 400:
+                                Toast.makeText(context, "Bad Request", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 401:
+                                Toast.makeText(context, "Token Invalid", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    } else Toast.makeText(context, "Server Down", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + sharedPreferences.getString(Class_Genric.Sp_Token, ""));
+                return params;
+            }
+
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                mStatusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+        };
+        queue.add(postRequest);
+    }
+
 }
