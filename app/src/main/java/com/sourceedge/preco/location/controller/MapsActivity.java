@@ -43,6 +43,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.sourceedge.preco.R;
 import com.sourceedge.preco.location.model.ModelPrinters;
 import com.sourceedge.preco.support.Class_Model_DB;
+import com.sourceedge.preco.support.models.Locations;
 import com.sourceedge.preco.uploadfile.controller.UploadFile;
 
 import java.util.ArrayList;
@@ -134,7 +135,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public boolean onMarkerClick(Marker arg0) {
-                Class_Model_DB.SelectedPrinter=new ModelPrinters(arg0.getTitle(),arg0.getPosition());
+                Class_Model_DB.SelectedPrinter=new Locations(arg0.getTitle(),arg0.getPosition());
                 return true;
             }
 

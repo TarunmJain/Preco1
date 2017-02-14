@@ -2,6 +2,8 @@ package com.sourceedge.preco.support.models;
 
 import android.location.Location;
 
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * Created by Centura User3 on 2/4/2017.
  */
@@ -17,6 +19,11 @@ public class Locations {
         Name="";
         Latitude=0.0;
         Longitude=0.0;
+    }
+    public Locations(String title, LatLng position){
+        Name=title;
+        Latitude=position.latitude;
+        Longitude=position.longitude;
     }
 
     public String getId() {

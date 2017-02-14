@@ -1,19 +1,12 @@
 package com.sourceedge.preco.location.controller;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,10 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,29 +29,24 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.ui.IconGenerator;
 import com.sourceedge.preco.R;
-import com.sourceedge.preco.bookphotocopy.controller.Scan;
-import com.sourceedge.preco.homescreen.controller.HomeScreen;
 import com.sourceedge.preco.location.model.ModelPrinters;
 import com.sourceedge.preco.location.view.LocationListAdapter;
-import com.sourceedge.preco.payment.controller.Payments;
 import com.sourceedge.preco.support.Class_Genric;
 import com.sourceedge.preco.support.Class_Model_DB;
 import com.sourceedge.preco.support.Class_Static;
-import com.sourceedge.preco.timeslots.controller.SlotSelection;
+import com.sourceedge.preco.support.Class_SyncApi;
+import com.sourceedge.preco.support.models.Locations;
 import com.sourceedge.preco.uploadfile.controller.UploadFile;
 
 import static com.sourceedge.preco.support.Class_Model_DB.SelectedPrinter;
-import static com.sourceedge.preco.viewer.controller.PdfViewer.context;
 
-public class Locations extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+public class MapLocation extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener, GoogleMap.OnInfoWindowClickListener {
     Toolbar toolbar;
@@ -85,7 +69,7 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_location);
-        Class_Genric.turnGPSOn(Locations.this);
+        Class_Genric.turnGPSOn(MapLocation.this);
         mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -94,7 +78,7 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
         scrollup = (TextView) findViewById(R.id.scrollup);
         setSupportActionBar(toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.locationslist);
-        linearLayoutManager = new LinearLayoutManager(Locations.this) {
+        linearLayoutManager = new LinearLayoutManager(MapLocation.this) {
             @Override
             public boolean canScrollVertically() {
                 return true;
@@ -118,9 +102,9 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
                 if (SelectedPrinter != null) {
                     if (Class_Static.isCopyScan) {
 
-                        // startActivity(new Intent(Locations.this, Scan.class));
+                        // startActivity(new Intent(MapLocation.this, Scan.class));
 
-                       /* dialog = new Dialog(Locations.this);
+                       /* dialog = new Dialog(MapLocation.this);
                         dialog.setContentView(R.layout.dialog_copies);
                         copiesScan = (TextView) dialog.findViewById(R.id.copies_scan);
                         nextButton = (Button) dialog.findViewById(R.id.next_button);
@@ -133,9 +117,9 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
                             public void onClick(View v) {
                                 if (!copiesScan.getText().toString().matches("0")) {
                                     dialog.dismiss();
-                                    startActivity(new Intent(Locations.this, Payments.class));
+                                    startActivity(new Intent(MapLocation.this, Payments.class));
                                 } else
-                                    Toast.makeText(Locations.this, "Min Count is 1", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MapLocation.this, "Min Count is 1", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -156,7 +140,7 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
                                     copiesScan.setText((Integer.parseInt(copiesScan.getText().toString()) - 1) + "");
                                     //productStock.setText("Stock Available : " + ((Integer.parseInt(productStock.getText().toString().split(": ")[1]) + 1) + ""));
                                 } else
-                                    Toast.makeText(Locations.this, "Min Count is 1", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MapLocation.this, "Min Count is 1", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -171,10 +155,10 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
                         dialog.show();*/
                     } else {
                         Class_Model_DB.SelectedPrinter = null;
-                        startActivity(new Intent(Locations.this, UploadFile.class));
+                        startActivity(new Intent(MapLocation.this, UploadFile.class));
                     }
                 } else
-                    Toast.makeText(Locations.this, "Please Select A Machine", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapLocation.this, "Please Select A Machine", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -182,7 +166,7 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
             @Override
             public void onClick(View v) {
                 if (isOpen) {
-                    linearLayoutManager = new LinearLayoutManager(Locations.this) {
+                    linearLayoutManager = new LinearLayoutManager(MapLocation.this) {
                         @Override
                         public boolean canScrollVertically() {
                             return true;
@@ -192,7 +176,7 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
                     scrollup.setText("View All");
                     isOpen = false;
                 } else {
-                    linearLayoutManager = new LinearLayoutManager(Locations.this) {
+                    linearLayoutManager = new LinearLayoutManager(MapLocation.this) {
                         @Override
                         public boolean canScrollVertically() {
                             return true;
@@ -323,13 +307,14 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
         //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         //mCurrLocationMarker = mMap.addMarker(markerOptions);
 
-        for (int x = 0; x < Class_Model_DB.Printers.size(); x++) {
+        for (int x = 0; x < Class_Model_DB.getLocationlist().size(); x++) {
             /*mMap.addMarker(new MarkerOptions()
                     .position(printer.getMarker().getPosition())
                     .title(printer.getTitle())
                     .snippet("Population: 4,137,400")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));*/
-            ModelPrinters printer = Class_Model_DB.Printers.get(x);
+            Locations printer = Class_Model_DB.getLocationlist().get(x);
+            LatLng lng=new LatLng(printer.getLatitude(),printer.getLongitude());
             MarkerOptions markerOptions1 = new MarkerOptions();
             //IconGenerator iconFactory = new IconGenerator(this);
             //iconFactory.setStyle(IconGenerator.STYLE_RED);
@@ -337,8 +322,8 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
 
             //markerOptions1.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
 
-            markerOptions1.position(printer.getMarker().getPosition());
-            markerOptions1.title(printer.getTitle());
+            markerOptions1.position(lng);
+            markerOptions1.title(printer.getName());
             markerOptions1.zIndex(x);
             //markerOptions1.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
             Marker label = mMap.addMarker(markerOptions1);
@@ -372,14 +357,15 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
 
                     // Setting the latitude
                     tvLat.setText(arg0.getTitle());
-                    if (Class_Model_DB.Printers.get((int) arg0.getZIndex()).isOperator())
+
+                    /*if (Class_Model_DB.Printers.get((int) arg0.getZIndex()).isOperator())
                         operator.setText("Yes");
-                    else operator.setText("No");
+                    else operator.setText("No");*/
 
                     // Setting the longitude
-                    tvLng.setText(Class_Model_DB.Printers.get((int) arg0.getZIndex()).getPaperType());
+                    //tvLng.setText(Class_Model_DB.Printers.get((int) arg0.getZIndex()).getPaperType());
 
-                    tvcolor.setText(Class_Model_DB.Printers.get((int) arg0.getZIndex()).getColorType());
+                    //tvcolor.setText(Class_Model_DB.Printers.get((int) arg0.getZIndex()).getColorType());
 
 
                     // Returning the view containing InfoWindow contents
@@ -420,13 +406,13 @@ public class Locations extends AppCompatActivity implements OnMapReadyCallback, 
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Class_Model_DB.SelectedPrinter = new ModelPrinters(marker.getTitle(), marker.getPosition());
+        Class_Model_DB.SelectedPrinter = new Locations(marker.getTitle(), marker.getPosition());
         next.performClick();
     }
 
     public static void setCameraLocation(int pos) {
         CameraUpdate center =
-                CameraUpdateFactory.newLatLng(Class_Model_DB.Printers.get(pos).getMarker().getPosition());
+                CameraUpdateFactory.newLatLng(new LatLng(Class_Model_DB.getLocationlist().get(pos).getLatitude(),Class_Model_DB.getLocationlist().get(pos).getLongitude()));
         CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
         //animateTo(Class_Model_DB.Printers.get(pos).getMarker().getPosition(),15,0,0,500);
         mMap.moveCamera(center);

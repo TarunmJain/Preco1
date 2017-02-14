@@ -117,6 +117,7 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
     String filename;
     byte[] data;
     public static InputStream inputstream;
+    InputStream is;
 
     static final int REQUEST_CLICK_IMAGE = 1;
     static final int REQUEST_SELECT_IMAGE = 2;
@@ -392,16 +393,23 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
                     .build();
 
             String fileId = file.getId();
-            OutputStream outputStream = new ByteArrayOutputStream();
+            if (googleMimeType.matches("application/pdf")) {
+                        Class_Static.isPdfUri = true;
+                        startActivity(new Intent(UploadFile.this, PdfViewer.class));
+                    } else {
+                OutputStream outputStream = new ByteArrayOutputStream();
 
-            mService.files().export(fileId, "application/pdf")
-                    .executeMediaAndDownloadTo(outputStream);
-            ByteArrayOutputStream bo = (ByteArrayOutputStream) outputStream;
+                mService.files().export(fileId, "application/pdf")
+                        .executeMediaAndDownloadTo(outputStream);
+                ByteArrayOutputStream bo = (ByteArrayOutputStream) outputStream;
 
-            data = bo.toByteArray();
-            InputStream is = new ByteArrayInputStream(data);
-            //deleteFile(mService,fileId);
+                data = bo.toByteArray();
+                is = new ByteArrayInputStream(data);
+
+            }
             return is;
+
+            //deleteFile(mService,fileId);
         }
 
         private void deleteFile(Drive service, String fileId) {

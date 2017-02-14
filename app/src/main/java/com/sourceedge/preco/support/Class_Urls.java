@@ -11,7 +11,7 @@ public class Class_Urls {
     public static final String ExternalLogin=Parent+"Security/ExternalLogin";
     public static final String SignUp=Parent+"Security/SignUp";
     public static final String GetServices=Parent+"Services/GetServices";
-    public static final String GetLocation=Parent+"Services/GetLocation";
+    public static final String GetLocation=Parent+"Services/GetLocations";
     public static final String GetLocationDevices=Parent+"Services/GetDevices";
     public static final String GetServiceOptions=Parent+"Services/GetOptions";
     public static final String GetPrice=Parent+"Services/GetPrice";

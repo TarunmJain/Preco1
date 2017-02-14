@@ -41,9 +41,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
@@ -262,6 +264,21 @@ public class Class_Genric {
       /*  DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
         return px;*/
+    }
+
+
+    public static void setImage(Context context, String url, ImageView image){
+        if (url == null)
+            image.setImageResource(R.drawable.noimage);
+        else if (url.matches("")) {
+            image.setImageResource(R.drawable.noimage);
+        } else {
+            Glide
+                    .with(context)
+                    .load(url)
+                    .error(R.drawable.noimage)
+                    .into(image);
+        }
     }
 
     /*public static void logout(final Context context) {

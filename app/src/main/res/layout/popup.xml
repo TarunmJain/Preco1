@@ -10,9 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 <FrameLayout
-    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
-    android:paddingBottom="@dimen/dimen_1"
     android:layout_height="wrap_content">
     <TextView
         android:background="@color/colorWhite"
@@ -27,13 +25,8 @@
     <LinearLayout
         android:padding="@dimen/dimen_5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:textColor="@color/colorBlack"
-            android:layout_width="wrap_content"
-            android:text="Operator "
-            android:layout_marginRight="@dimen/dimen_5"
-            android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone">
         <TextView
             android:layout_gravity="right"
             android:id="@+id/operator"
@@ -43,16 +36,12 @@
             android:padding="@dimen/dimen_2"
             android:textColor="@color/colorBlack"/>
     </LinearLayout>
+
     <LinearLayout
         android:padding="@dimen/dimen_5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:text="Paper Type "
-            android:layout_marginRight="@dimen/dimen_5"
-            android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone">
         <TextView
             android:layout_gravity="right"
             android:id="@+id/printeroption"
@@ -65,13 +54,8 @@
     <LinearLayout
         android:padding="@dimen/dimen_5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:textColor="@color/colorBlack"
-            android:layout_width="wrap_content"
-            android:text="Color Type "
-            android:layout_marginRight="@dimen/dimen_5"
-            android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <TextView
             android:layout_gravity="right"
@@ -86,7 +70,8 @@
         android:gravity="right"
         android:padding="@dimen/dimen_5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
         <TextView
             android:layout_gravity="right"
             android:padding="@dimen/dimen_10"

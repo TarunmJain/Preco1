@@ -21,7 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sourceedge.preco.homescreen.controller.HomeScreen;
-import com.sourceedge.preco.login.controller.Login;
+import com.sourceedge.preco.location.controller.MapLocation;
 import com.sourceedge.preco.register.controller.PrefManager;
 import com.sourceedge.preco.register.controller.WelcomeActivity;
 import com.sourceedge.preco.support.models.KeyValuePair;
@@ -277,6 +277,7 @@ public class Class_SyncApi {
                             }.getType();
                             services = gson.fromJson(jsonObject.toString(), listtype);
                             Class_Model_DB.setServiceslist(services);
+                            HomeScreen.InitializeAdapter(context);
                             break;
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -326,14 +327,14 @@ public class Class_SyncApi {
         queue.add(postRequest);
     }
 
-    public static void GetLocationApi(final Context context, String serviceid, Double lat, Double longitude) {
+    public static void GetLocationApi(final Context context, String serviceid) {
         sharedPreferences = context.getSharedPreferences(Class_Genric.MyPref, context.MODE_PRIVATE);
 
         RequestQueue queue = Volley.newRequestQueue(context);
         ArrayList<KeyValuePair> params = new ArrayList<KeyValuePair>();
         params.add(new KeyValuePair("ServiceId", serviceid));
-        params.add(new KeyValuePair("Latitude", lat + ""));
-        params.add(new KeyValuePair("Longitude", longitude + ""));
+        //params.add(new KeyValuePair("Latitude", lat + ""));
+        //params.add(new KeyValuePair("Longitude", longitude + ""));
         Class_Genric.ShowDialog(context, "Loading...", true);
         StringRequest postRequest = new StringRequest(Request.Method.GET, Class_Genric.generateUrl(Class_Urls.GetLocation, params), new Response.Listener<String>() {
             @Override
@@ -349,6 +350,8 @@ public class Class_SyncApi {
                             }.getType();
                             locations = gson.fromJson(jsonObject.toString(), listtype);
                             Class_Model_DB.setLocationlist(locations);
+                            context.startActivity(new Intent(context, MapLocation.class));
+
                             break;
                         } catch (JSONException e) {
                             e.printStackTrace();

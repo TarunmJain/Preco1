@@ -87,7 +87,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".location.controller.Locations"
+            android:name=".location.controller.MapLocation"
             android:label="@string/title_activity_location"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

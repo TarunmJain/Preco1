@@ -15,9 +15,8 @@ import java.util.ArrayList;
  */
 
 public class Class_Model_DB {
-    public static ModelPrinters SelectedPrinter=null;
+    public static Locations SelectedPrinter=null;
     public static ArrayList<ModelPrinters> Printers= new ArrayList<ModelPrinters>();
-    public static PrintDocumentInfo selectedattibutes;
 
     private static ArrayList<Services> serviceslist=new ArrayList<Services>();
     private static Services services=new Services();
@@ -31,13 +30,12 @@ public class Class_Model_DB {
     private static ArrayList<ServiceOptions> serviceOptionsList=new ArrayList<ServiceOptions>();
     private static ServiceOptions serviceOptions=new ServiceOptions();
 
+
+
+
     public static ArrayList<Locations> getLocationlist() {
         return locationlist;
     }
-
-
-
-
 
     public static void setLocationlist(ArrayList<Locations> locationlist) {
         Class_Model_DB.locationlist = locationlist;

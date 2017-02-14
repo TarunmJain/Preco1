@@ -1,16 +1,14 @@
 package com.sourceedge.preco.location.view;
 
-import android.location.Location;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sourceedge.preco.R;
-import com.sourceedge.preco.location.controller.Locations;
+import com.sourceedge.preco.location.controller.MapLocation;
 import com.sourceedge.preco.support.Class_Model_DB;
 
 /**
@@ -33,9 +31,9 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
         holder.next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Locations.setCameraLocation(position);
+                MapLocation.setCameraLocation(position);
                /* Class_Model_DB.SelectedPrinter=Class_Model_DB.Printers.get(position);
-                Locations.next.performClick();*/
+                MapLocation.next.performClick();*/
             }
         });
     }

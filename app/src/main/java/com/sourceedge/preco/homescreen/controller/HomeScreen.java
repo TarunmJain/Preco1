@@ -1,46 +1,26 @@
 package com.sourceedge.preco.homescreen.controller;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Location;
-import android.location.LocationManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.CancellationSignal;
-import android.os.ParcelFileDescriptor;
-import android.print.PageRange;
-import android.print.PrintAttributes;
-import android.print.PrintDocumentAdapter;
-import android.print.PrintDocumentInfo;
-import android.print.PrintManager;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
@@ -49,43 +29,21 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.plus.Plus;
 import com.sourceedge.preco.R;
-import com.sourceedge.preco.bookphotocopy.controller.BookPhotoCopy;
-import com.sourceedge.preco.bookphotocopy.controller.Copy;
-import com.sourceedge.preco.bookphotocopy.controller.Scan;
-import com.sourceedge.preco.forms.controller.Forms;
-import com.sourceedge.preco.bookphotocopy.controller.Scan;
 import com.sourceedge.preco.history.controller.History;
-import com.sourceedge.preco.location.controller.Locations;
-import com.sourceedge.preco.location.controller.MapsActivity;
+import com.sourceedge.preco.homescreen.view.ServicesAdapter;
 import com.sourceedge.preco.login.controller.Login;
-import com.sourceedge.preco.login.controller.Splash;
-import com.sourceedge.preco.myprofile.controller.MyProfile;
 import com.sourceedge.preco.payment.controller.AddPrecoPoints;
-import com.sourceedge.preco.printproperties.controller.PrintProperties;
 import com.sourceedge.preco.support.Class_Genric;
-import com.sourceedge.preco.support.Class_Model_DB;
 import com.sourceedge.preco.support.Class_Static;
 import com.sourceedge.preco.support.Class_SyncApi;
 import com.sourceedge.preco.support.MyApplication;
-import com.sourceedge.preco.support.PickAndPreview;
-import com.sourceedge.preco.uploadfile.controller.UploadFile;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     Toolbar toolbar;
     DrawerLayout drawer;
     ActionBarDrawerToggle mDrawerToggle;
     CoordinatorLayout coordinatorLayout;
-    ImageView print, copyScan, bookXerox, jobs;
     RelativeLayout addPointLayout, historyLayout;
     static Activity a;
     static SharedPreferences sharedPreferences;
@@ -95,6 +53,7 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
     CheckBox blackAndWhiteCheckbox, colorCheckbox;
     LinearLayout blackAndWhiteColor, colorType;
     TextView colorConfirm;
+    static RecyclerView servicesRecyclerview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,22 +71,25 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         toolbar.setTitle("Preco");
         setSupportActionBar(toolbar);
-        jobs = (ImageView) findViewById(R.id.job);
         drawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
         Class_Genric.setupDrawer(toolbar, drawer, mDrawerToggle, HomeScreen.this);
-        print = (ImageView) findViewById(R.id.print);
-        copyScan = (ImageView) findViewById(R.id.copy_scan);
-        bookXerox = (ImageView) findViewById(R.id.book_xerox);
         addPointLayout = (RelativeLayout) findViewById(R.id.addpointlay);
         historyLayout = (RelativeLayout) findViewById(R.id.historylay);
+        servicesRecyclerview=(RecyclerView)findViewById(R.id.services_recyclerview);
 
         mGoogleApiClient = ((MyApplication) getApplication()).getGoogleApiClient(HomeScreen.this, this);
         OnClicks();
         Class_Genric.DrawerOnClicks(HomeScreen.this);
+
+    }
+
+    public static void InitializeAdapter(Context context) {
+        servicesRecyclerview.setLayoutManager(new GridLayoutManager(context,2));
+        servicesRecyclerview.setAdapter(new ServicesAdapter(context));
     }
 
     private void OnClicks() {
-        print.setOnClickListener(new View.OnClickListener() {
+        /*print.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //REVERT BACK
@@ -176,22 +138,22 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
                 colorConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(new Intent(HomeScreen.this, Locations.class));
+                        startActivity(new Intent(HomeScreen.this, MapLocation.class));
                         dialog.dismiss();
                     }
                 });
             }
-        });
+        });*/
 
-        copyScan.setOnClickListener(new View.OnClickListener() {
+        /*copyScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Class_Static.isCopyScan = false;
                 startActivity(new Intent(HomeScreen.this, Scan.class));
             }
-        });
+        });*/
 
-        bookXerox.setOnClickListener(new View.OnClickListener() {
+        /*bookXerox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Class_Static.isCopyScan = false;
@@ -204,7 +166,7 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
             public void onClick(View v) {
                 startActivity(new Intent(HomeScreen.this, Forms.class));
             }
-        });
+        });*/
 
         addPointLayout.setOnClickListener(new View.OnClickListener() {
             @Override
