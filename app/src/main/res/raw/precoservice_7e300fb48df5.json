@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "precoservice-158708",
+  "private_key_id": "7e300fb48df54454e9041fbc4079a46257a5d82d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC12ZWwYIcV2NoM\nGUpIDN8E+i0dE//YanX30qbh2RmJX6C0+nGaJos1wd1w3pZc7cXIimKJ2I4a1hBg\nch/uZX0yqpG3zvuo2N5V4fCu2RlbZc1GBwyzp/mGTQEx7w7c3INgNtX2Lbubqfr3\nAE2mNOD2JLY3XrnSAvyJQF0hfCMhL4bHWLD82aNGsHjNh1UvtIfIGG6qxCxdhCaH\np6EQcQ+aW7d/Mt6qyZTtqsdz8x3bAa2NpXUSZkI6DekWe1FP1aX/pq7zzD1LOH9C\n/OBlT+m5PzcfKocQZyjujrcg9MI+e7sQix6oEVAUsyE3YDI96t8m7ux+GZotMadK\nrtPeLKjZAgMBAAECggEAOA5McEQxH/DqthQNq8wb60LbKT2C/klC+BO9UZ1Em+4Y\ncfFJl4UOIJIUGrjijN7Wuwy9d1SD6Y3XGoPTh/9M6pNdu9VYCiJf1wWA1cUiZeQp\ntM5zgeXjqxyNo8DXSgnHjZ8ZsXtDe6aYMA+t3/Ao8Hc8nDDdAvncsspeavYDNjUU\nyNxMAiFqlnvbb+pwPdw9o2RG6cNjUZ0jSP3doIyRB2wI0Nahi9Q9SgmmjSorJIe+\n1A0/udDvpkz81rSIf7LbhWM7WZUIc7n1qdENrrE5b2neAwKsKAAb5ouhxymEfkLn\nmFdu/4j4HZ89RkFuiv0Id7ZWzKP2ae0yNMAXnFXiaQKBgQDrLvz7NwqFU/cyvzgK\nNdrPAv08yqlsSQuXp6Rpbm/hGiZcOieup4x3xMoRW57UkezVX03WdbJCHBQAeWcQ\nQlz7cSwo5TK8XLhqQevdTMbCxMoo4dSBQjeZ0hYYo0I5lj6wtDxMzpniuHnVun6N\nf5NB9YQZOQYb4srUcnH85yk9swKBgQDF8hzyfdbc96KEBmDuKZExifRQL7TNjN/m\nT2+Ho39ZfANgBfgstkwHAWe8n5tFX6bVjD2rjKbnhIkQBwZtJfY6/TJ2FHl+YzrM\nmV/9jHkiFK2n9x/ZA5UQJ5pmCjAxoOvxADHVo4jrQwo+uIhFN3D9hCfCLPBg5JmC\njjQ32YTxQwKBgQCGMM9kP6mfHaPErtq46LWqvJfl4fT9tkgJBjyHc94eYJ9WrFAM\nFcnOZNivQsnDnGe376MoJQvLMN4wzxSBcHxBc/ewdeaXF4iaCHceVDps04BOB10L\nS88R04+MC0s0NIgcpxpo8NFZTc0mqDyhXBOX5RC0m5bivmrhAVQM65DahQKBgCiv\nMJ/umWDlTPPR085foMYL0rlAdOrij4povUWlpyEfShpMX8vg1BOEiGvOaj2CAWpW\n3r4JtKxVI062Au4gJVHOhLacUrRVdNpkk8QrQSJuGZsyQct63wJpAWUDpxAsQRJR\ntexxJk0khFCL4QZI9OJGbV2NmwJvOdYJoFXyUU69AoGBAOLyfI7OAdjLGT3rwoqX\n8SHSRWb1sFef01u2QI+xupJy5EXnT2wXO77XHzQbjKbgw86tE8S5dEnrJYhSvE1I\nit3dKGlqyRppBfAuweLVT0h4r2P6wp37jn7ud6VtWnmMQNEuDRmr7q5q4GyfZZ6d\n91qGStbHIUPAVhvBYtm52TU+\n-----END PRIVATE KEY-----\n",
+  "client_email": "precoservice@precoservice-158708.iam.gserviceaccount.com",
+  "client_id": "112300216618741908905",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/precoservice%40precoservice-158708.iam.gserviceaccount.com"
+}

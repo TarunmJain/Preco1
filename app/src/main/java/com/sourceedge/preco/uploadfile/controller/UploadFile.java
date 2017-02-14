@@ -138,7 +138,7 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
         clickimage = (LinearLayout) findViewById(R.id.clickimage);
         sharedPreferences = this.getSharedPreferences(Class_Genric.MyPref, MODE_PRIVATE);
         try {
-            mCredential = GoogleCredential.fromStream(getResources().openRawResource(R.raw.preco_73c3d093387d)).createScoped(Arrays.asList(SCOPES));
+            mCredential = GoogleCredential.fromStream(getResources().openRawResource(R.raw.precoservice_7e300fb48df5)).createScoped(Arrays.asList(SCOPES));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -270,10 +270,11 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
                         edit.putString(Class_Genric.Sp_Pdf, userPickedUri.getPath());
                         edit.commit();
                     }
-                    if (mimeType.matches("application/pdf")) {
+                    getResultsFromApi();
+                    /*if (mimeType.matches("application/pdf")) {
                         Class_Static.isPdfUri = true;
                         startActivity(new Intent(UploadFile.this, PdfViewer.class));
-                    } else getResultsFromApi();
+                    } else getResultsFromApi();*/
                     break;
                 default:
                     super.onActivityResult(requestCode, resultCode, data);
@@ -363,6 +364,10 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
 
                 case "image/png":
                     googleMimeType = "application/vnd.google-apps.drawing";
+                    break;
+
+                case "application/pdf":
+                    googleMimeType = "application/pdf";
                     break;
             }
 

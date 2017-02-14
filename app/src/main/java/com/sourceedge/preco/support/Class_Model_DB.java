@@ -35,6 +35,10 @@ public class Class_Model_DB {
         return locationlist;
     }
 
+
+
+
+
     public static void setLocationlist(ArrayList<Locations> locationlist) {
         Class_Model_DB.locationlist = locationlist;
     }
