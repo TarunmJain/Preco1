@@ -106,6 +106,7 @@ public class PdfViewer extends AppCompatActivity implements OnPageChangeListener
                         }
                     }).load();
         }else {
+
             pdfView.fromStream(UploadFile.inputstream)
                     .defaultPage(0)
                     .onPageChange(this)

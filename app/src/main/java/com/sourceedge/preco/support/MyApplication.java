@@ -7,6 +7,8 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.io.InputStream;
+
 /**
  * Created by Centura User3 on 1/21/2017.
  */
@@ -16,6 +18,7 @@ public class MyApplication extends Application {
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInOptions gso;
     public AppCompatActivity activity;
+
 
     public GoogleSignInOptions getGoogleSignInOptions(){
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -31,4 +34,6 @@ public class MyApplication extends Application {
                 .build();
         return mGoogleApiClient;
     }
+
+
 }

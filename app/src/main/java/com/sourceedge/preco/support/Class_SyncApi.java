@@ -31,6 +31,7 @@ import com.sourceedge.preco.support.models.Options;
 import com.sourceedge.preco.support.models.ServiceOptions;
 import com.sourceedge.preco.support.models.Services;
 import com.sourceedge.preco.support.models.SubmitOrder;
+import com.sourceedge.preco.uploadfile.controller.UploadFile;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -484,6 +485,7 @@ public class Class_SyncApi {
                             }.getType();
                             serviceOptions = gson.fromJson(jsonObject.toString(), listtype);
                             Class_Model_DB.setServiceOptionsList(serviceOptions);
+                            context.startActivity(new Intent(context, UploadFile.class));
                             break;
                         } catch (JSONException e) {
                             e.printStackTrace();

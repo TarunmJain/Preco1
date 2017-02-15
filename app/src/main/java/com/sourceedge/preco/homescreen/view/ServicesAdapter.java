@@ -113,6 +113,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
                     colorConfirm.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            Class_Static.serviceid=model.get(pos).getId();
                             Class_SyncApi.GetLocationApi(mContext,model.get(pos).getId());
                             dialog.dismiss();
                         }

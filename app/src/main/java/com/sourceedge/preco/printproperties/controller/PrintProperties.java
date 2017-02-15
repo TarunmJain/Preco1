@@ -3,7 +3,9 @@ package com.sourceedge.preco.printproperties.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sourceedge.preco.R;
+import com.sourceedge.preco.printproperties.view.PropertiesAdapter;
 import com.sourceedge.preco.support.Class_Genric;
 import com.sourceedge.preco.support.Class_Static;
 import com.sourceedge.preco.viewer.controller.PdfViewer;
@@ -29,13 +32,12 @@ import java.util.ArrayList;
 public class PrintProperties extends AppCompatActivity {
     Toolbar toolbar;
     TextView nextButton;
-    ImageView pagingIcon,papersizeIcon,colorIcon,singledoubleIcon,pagenumberIcon,pagetypeIcon,collateduncollatedIcon;
-    Spinner paperSizeSpinner,colorSpinner,singleDoublespinner,pageTypeSpinner,collatedUncollatedSpinner;
-    ArrayList<String> paperSize,color,singleDouble,pageType,collatedUncollated;
+    //ImageView pagingIcon,papersizeIcon,colorIcon,singledoubleIcon,pagenumberIcon,pagetypeIcon,collateduncollatedIcon;
+    //Spinner paperSizeSpinner,colorSpinner,singleDoublespinner,pageTypeSpinner,collatedUncollatedSpinner;
+    //ArrayList<String> paperSize,color,singleDouble,pageType,collatedUncollated;
 
+    RecyclerView propertiesRecyclerview;
 
-    PopupMenu popup;
-    Menu popupMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,10 @@ public class PrintProperties extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         nextButton = (TextView) findViewById(R.id.next_button);
 
+        propertiesRecyclerview = (RecyclerView) findViewById(R.id.properties_recyclerview);
 
-        pagingIcon=(ImageView)findViewById(R.id.paging_icon);
+
+        /*pagingIcon=(ImageView)findViewById(R.id.paging_icon);
         papersizeIcon=(ImageView)findViewById(R.id.papersize_icon);
         colorIcon=(ImageView)findViewById(R.id.color_icon);
         singledoubleIcon=(ImageView)findViewById(R.id.singledouble_icon);
@@ -60,13 +64,20 @@ public class PrintProperties extends AppCompatActivity {
         colorSpinner=(Spinner)findViewById(R.id.color_spinner);
         singleDoublespinner=(Spinner)findViewById(R.id.single_double_spinner);
         pageTypeSpinner=(Spinner)findViewById(R.id.paper_type_spinner);
-        collatedUncollatedSpinner=(Spinner)findViewById(R.id.collated_uncollated_spinner);
-        Initialization();
-        AddSpinner();
+        collatedUncollatedSpinner=(Spinner)findViewById(R.id.collated_uncollated_spinner);*/
+        InitializeAdapter();
+        // Initialization();
+        // AddSpinner();
         OnClicks();
     }
 
-    private void AddSpinner() {
+    private void InitializeAdapter() {
+        propertiesRecyclerview.setLayoutManager(new LinearLayoutManager(PrintProperties.this, LinearLayoutManager.VERTICAL, false));
+        propertiesRecyclerview.setAdapter(new PropertiesAdapter(PrintProperties.this));
+    }
+
+
+    /*private void AddSpinner() {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paperSize);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         paperSizeSpinner.setAdapter(dataAdapter);
@@ -86,9 +97,9 @@ public class PrintProperties extends AppCompatActivity {
         ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, collatedUncollated);
         dataAdapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         collatedUncollatedSpinner.setAdapter(dataAdapter4);
-    }
+    }*/
 
-    private void Initialization() {
+    /*private void Initialization() {
         paperSize=new ArrayList<String>();
         paperSize.add("A4");
         paperSize.add("A3");
@@ -111,10 +122,10 @@ public class PrintProperties extends AppCompatActivity {
         collatedUncollated=new ArrayList<String>();
         collatedUncollated.add("Collated");
         collatedUncollated.add("Uncollated");
-    }
+    }*/
 
     private void OnClicks() {
-        pagingIcon.setOnClickListener(new View.OnClickListener() {
+       /* pagingIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Class_Genric.PopupMenu(PrintProperties.this,pagingIcon,1);
@@ -161,15 +172,13 @@ public class PrintProperties extends AppCompatActivity {
             public void onClick(View view) {
                 Class_Genric.PopupMenu(PrintProperties.this,collateduncollatedIcon,7);
             }
-        });
+        });*/
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Class_Static.ispdf) {
-                    startActivity(new Intent(PrintProperties.this, PdfViewer.class));
-                } else
-                    startActivity(new Intent(PrintProperties.this, Viewer.class));
+
+                startActivity(new Intent(PrintProperties.this, PdfViewer.class));
                 finish();
             }
         });

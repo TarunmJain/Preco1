@@ -62,6 +62,7 @@ public class MapLocation extends AppCompatActivity implements OnMapReadyCallback
     LinearLayout footer;
     LinearLayoutManager linearLayoutManager;
     boolean isOpen = false;
+    Locations printer;
 
 
     @Override
@@ -155,7 +156,7 @@ public class MapLocation extends AppCompatActivity implements OnMapReadyCallback
                         dialog.show();*/
                     } else {
                         Class_Model_DB.SelectedPrinter = null;
-                        startActivity(new Intent(MapLocation.this, UploadFile.class));
+                        Class_SyncApi.GetServiceOptionsApi(MapLocation.this,Class_Static.serviceid,printer.getId());
                     }
                 } else
                     Toast.makeText(MapLocation.this, "Please Select A Machine", Toast.LENGTH_SHORT).show();
@@ -313,7 +314,7 @@ public class MapLocation extends AppCompatActivity implements OnMapReadyCallback
                     .title(printer.getTitle())
                     .snippet("Population: 4,137,400")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));*/
-            Locations printer = Class_Model_DB.getLocationlist().get(x);
+            printer = Class_Model_DB.getLocationlist().get(x);
             LatLng lng=new LatLng(printer.getLatitude(),printer.getLongitude());
             MarkerOptions markerOptions1 = new MarkerOptions();
             //IconGenerator iconFactory = new IconGenerator(this);

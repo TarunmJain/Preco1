@@ -83,6 +83,7 @@ import com.sourceedge.preco.printproperties.controller.PrintProperties;
 import com.sourceedge.preco.support.Class_Genric;
 import com.sourceedge.preco.support.Class_Model_DB;
 import com.sourceedge.preco.support.Class_Static;
+import com.sourceedge.preco.support.Class_SyncApi;
 import com.sourceedge.preco.support.PickAndPreview;
 import com.sourceedge.preco.viewer.controller.PdfViewer;
 import com.sourceedge.preco.viewer.controller.Viewer;
@@ -394,9 +395,9 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
 
             String fileId = file.getId();
             if (googleMimeType.matches("application/pdf")) {
-                        Class_Static.isPdfUri = true;
-                        startActivity(new Intent(UploadFile.this, PdfViewer.class));
-                    } else {
+                Class_Static.isPdfUri = true;
+                startActivity(new Intent(UploadFile.this, PdfViewer.class));
+            } else {
                 OutputStream outputStream = new ByteArrayOutputStream();
 
                 mService.files().export(fileId, "application/pdf")

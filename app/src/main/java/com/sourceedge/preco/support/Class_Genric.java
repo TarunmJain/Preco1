@@ -81,6 +81,7 @@ public class Class_Genric {
     public static final String Sp_Balance = "Balance";
     public static final String Sp_Image = "Image";
     public static final String Sp_Pdf = "Pdf";
+    public static final String Sp_is = "IS";
     public static boolean progressAlive = false;
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
     public static final int PERMISSION_REQUEST_CODE = 1;

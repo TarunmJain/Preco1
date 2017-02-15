@@ -11,7 +11,15 @@
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/properties_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/next_button">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
@@ -21,35 +29,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Paging"
-                android:padding="@dimen/dimen_10"
+                android:orientation="vertical"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:layout_marginTop="@dimen/dimen_5"
-                android:layout_marginLeft="@dimen/dimen_5"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dimen_10"
-                android:layout_marginLeft="@dimen/dimen_10"
-                android:background="@drawable/transparent_square_box">
-                <EditText
-                    android:layout_toLeftOf="@+id/paging_icon"
+                android:layout_marginLeft="@dimen/dimen_5">
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:padding="3dp"/>
-                <ImageView
-                    android:id="@+id/paging_icon"
-                    android:layout_width="@dimen/dimen_30"
+                    android:text="Paging"
+                    android:padding="@dimen/dimen_10"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_alert_circle_outline_grey600_24dp"/>
-            </RelativeLayout>
+                    android:background="@drawable/transparent_square_box">
+                    <EditText
+                        android:layout_toLeftOf="@+id/paging_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:padding="3dp"/>
+                    <ImageView
+                        android:id="@+id/paging_icon"
+                        android:layout_width="@dimen/dimen_30"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_alert_circle_outline_grey600_24dp"/>
+                </RelativeLayout>
+            </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,15 +77,13 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_10"
-                android:layout_marginRight="@dimen/dimen_10"
                 android:background="@drawable/transparent_square_box">
-                <!--<TextView
+                &lt;!&ndash;<TextView
                     android:layout_toLeftOf="@+id/icon1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="A4"
-                    android:padding="@dimen/dimen_10"/>-->
+                    android:padding="@dimen/dimen_10"/>&ndash;&gt;
                 <Spinner
                     android:id="@+id/paper_size_spinner"
                     android:layout_toLeftOf="@+id/papersize_icon"
@@ -86,26 +99,28 @@
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_alert_circle_outline_grey600_24dp"/>
             </RelativeLayout>
-
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="@dimen/dimen_10"
+            android:layout_marginLeft="@dimen/dimen_5">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Color"
-                android:padding="@dimen/dimen_10"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:layout_marginRight="@dimen/dimen_10"/>
+                android:padding="@dimen/dimen_10"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_10"
-                android:layout_marginRight="@dimen/dimen_10"
                 android:background="@drawable/transparent_square_box">
-                <!--<TextView
+                &lt;!&ndash;<TextView
                     android:layout_toLeftOf="@+id/icon1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="A4"
-                    android:padding="@dimen/dimen_10"/>-->
+                    android:padding="@dimen/dimen_10"/>&ndash;&gt;
                 <Spinner
                     android:id="@+id/color_spinner"
                     android:layout_toLeftOf="@+id/color_icon"
@@ -121,8 +136,9 @@
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_alert_circle_outline_grey600_24dp"/>
             </RelativeLayout>
+            </LinearLayout>
 
-            <TextView
+           &lt;!&ndash; <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Single/Double"
@@ -135,12 +151,12 @@
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:background="@drawable/transparent_square_box">
-                <!--<TextView
+                &lt;!&ndash;<TextView
                     android:layout_toLeftOf="@+id/icon1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="A4"
-                    android:padding="@dimen/dimen_10"/>-->
+                    android:padding="@dimen/dimen_10"/>&ndash;&gt;
                 <Spinner
                     android:id="@+id/single_double_spinner"
                     android:layout_toLeftOf="@+id/singledouble_icon"
@@ -176,11 +192,11 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:padding="3dp"/>
-                <!--<Spinner
+                &lt;!&ndash;<Spinner
                     android:id="@+id/color_spinner"
                     android:layout_toLeftOf="@+id/icon2"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">-->
+                    android:layout_height="40dp">&ndash;&gt;
                 <ImageView
                     android:id="@+id/pagenumber_icon"
                     android:layout_width="@dimen/dimen_30"
@@ -189,7 +205,7 @@
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_alert_circle_outline_grey600_24dp"/>
             </RelativeLayout>
-            <!--<RelativeLayout
+            &lt;!&ndash;<RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_5"
@@ -211,7 +227,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_alert_circle_outline_grey600_24dp"/>
-            </RelativeLayout>-->
+            </RelativeLayout>&ndash;&gt;
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -225,12 +241,12 @@
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:background="@drawable/transparent_square_box">
-                <!--<TextView
+                &lt;!&ndash;<TextView
                     android:layout_toLeftOf="@+id/icon1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="A4"
-                    android:padding="@dimen/dimen_10"/>-->
+                    android:padding="@dimen/dimen_10"/>&ndash;&gt;
                 <Spinner
                     android:id="@+id/paper_type_spinner"
                     android:layout_toLeftOf="@+id/pagetype_icon"
@@ -261,12 +277,12 @@
                 android:layout_marginRight="@dimen/dimen_10"
                 android:layout_marginBottom="@dimen/dimen_10"
                 android:background="@drawable/transparent_square_box">
-                <!--<TextView
+                &lt;!&ndash;<TextView
                     android:layout_toLeftOf="@+id/icon1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="A4"
-                    android:padding="@dimen/dimen_10"/>-->
+                    android:padding="@dimen/dimen_10"/>&ndash;&gt;
                 <Spinner
                     android:id="@+id/collated_uncollated_spinner"
                     android:layout_toLeftOf="@+id/collateduncollated_icon"
@@ -292,8 +308,22 @@
                 android:textColor="@color/colorWhite"
                 android:background="@color/colorAccent"
                 android:gravity="center"
-                android:padding="@dimen/dimen_15"/>
+                android:padding="@dimen/dimen_15"/>&ndash;&gt;
 
         </LinearLayout>
-    </ScrollView>
+    </ScrollView>-->
+    <TextView
+        android:id="@+id/next_button"
+        android:layout_width="@dimen/dimen_150"
+        android:layout_height="wrap_content"
+        android:text="UPDATE"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_10"
+        android:layout_marginBottom="@dimen/dimen_10"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:padding="@dimen/dimen_15"/>
 </RelativeLayout>

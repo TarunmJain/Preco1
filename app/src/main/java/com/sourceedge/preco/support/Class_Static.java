@@ -15,5 +15,7 @@ public class Class_Static {
     public static boolean isGoogleSignIn=false;
     public static boolean isFacebookSignIn=false;
     public static boolean isPdfUri=false;
+    public static String serviceid="";
+    public static String selectedoptions="";
     public static GoogleApiClient mGoogleApiClient;
 }

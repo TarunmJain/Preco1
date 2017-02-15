@@ -7,12 +7,12 @@ package com.sourceedge.preco.support.models;
 public class ServiceOptions {
     private String Id;
     private String Name;
-    private String Options;
+    private String OptionValues;
 
     public ServiceOptions(){
         Id="";
         Name="";
-        Options="";
+        OptionValues="";
     }
 
     public String getId() {
@@ -32,10 +32,10 @@ public class ServiceOptions {
     }
 
     public String getOptions() {
-        return Options;
+        return OptionValues;
     }
 
     public void setOptions(String options) {
-        Options = options;
+        OptionValues = options;
     }
 }
