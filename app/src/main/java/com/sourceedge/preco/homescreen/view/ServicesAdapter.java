@@ -58,7 +58,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
             holder.imageView.setImageResource(R.drawable.copy);
         else if (model.get(position).getName().matches("Binding"))
             holder.imageView.setImageResource(R.drawable.jobs);
-        OnClicks(holder,position);
+        OnClicks(holder, position);
 
     }
 
@@ -67,7 +67,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (model.get(pos).getName().matches("Printing")){
+                if (model.get(pos).getName().matches("Printing")) {
                     Class_Static.isCopyScan = false;
                     dialog = new Dialog(mContext);
                     dialog.setContentView(R.layout.dialog_copies);
@@ -113,15 +113,15 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
                     colorConfirm.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Class_Static.serviceid=model.get(pos).getId();
-                            Class_SyncApi.GetLocationApi(mContext,model.get(pos).getId());
+                            Class_Static.serviceid = model.get(pos).getId();
+                            Class_SyncApi.GetLocationApi(mContext, model.get(pos).getId());
                             dialog.dismiss();
                         }
                     });
-                } else if (model.get(pos).getName().matches("Scanning")){
+                } else if (model.get(pos).getName().matches("Scanning")) {
                     Class_Static.isCopyScan = false;
                     mContext.startActivity(new Intent(mContext, Scan.class));
-                } else if (model.get(pos).getName().matches("Copy")){
+                } else if (model.get(pos).getName().matches("Copy")) {
                     Class_Static.isCopyScan = false;
                     mContext.startActivity(new Intent(mContext, Copy.class));
                 } else if (model.get(pos).getName().matches("Binding"))
@@ -135,11 +135,11 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         return model.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView textView;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             imageView = (ImageView) v.findViewById(R.id.imageview);
             textView = (TextView) v.findViewById(R.id.textview);

@@ -218,10 +218,6 @@ public class UploadFile extends AppCompatActivity implements PrintHelper.OnPrint
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 0, outFile);
                             outFile.flush();
                             outFile.close();
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

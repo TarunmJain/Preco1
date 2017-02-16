@@ -49,12 +49,14 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:10.0.1'
     compile 'pub.devrel:easypermissions:0.2.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.itextpdf:itextg:5.5.10'
 
     compile('com.google.apis:google-api-services-sheets:v4-rev456-1.22.0') {
         exclude group: 'org.apache.httpcomponents'
     }
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta5'
 }
 
 apply plugin: 'com.google.gms.google-services'

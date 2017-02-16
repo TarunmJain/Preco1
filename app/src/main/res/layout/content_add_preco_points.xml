@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter Promo Code"
+            android:text="@string/enter_promo_code"
             android:padding="@dimen/dimen_10"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/textview_18"
@@ -38,7 +38,7 @@
             android:id="@+id/apply_button"
             android:layout_width="@dimen/dimen_150"
             android:layout_height="wrap_content"
-            android:text="APPLY"
+            android:text="@string/apply"
             android:textColor="@color/colorWhite"
             android:gravity="center"
             android:padding="@dimen/dimen_15"

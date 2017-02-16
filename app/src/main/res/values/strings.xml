@@ -82,5 +82,18 @@
     <string name="title_activity_scan">Scan</string>
     <string name="title_activity_change_password">ChangePassword</string>
     <string name="title_activity_password">Password</string>
+    <string name="apply">APPLY</string>
+    <string name="enter_promo_code">Enter Promo Code</string>
+    <string name="machine_id">Machine Id:</string>
+    <string name="services">Services:</string>
+    <string name="view">VIEW</string>
+    <string name="title_activity_jobs">Jobs</string>
+    <string name="date">Date:</string>
+    <string name="service_type_color">color</string>
+    <string name="service_type_a4">A4</string>
+    <string name="time">Time:</string>
+    <string name="service_type_pagetype">Landscape</string>
+    <string name="service_type_single_double">Single</string>
+
 
 </resources>

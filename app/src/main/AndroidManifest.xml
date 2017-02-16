@@ -151,7 +151,7 @@
             android:name=".viewer.controller.PdfViewer"
             android:label="@string/title_activity_pdf_viewer"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".payment.controller.AddPrecoPoints"
             android:label="@string/title_activity_add_preco_points"
@@ -211,7 +211,11 @@
         <activity
             android:name=".login.controller.Password"
             android:label="@string/title_activity_password"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".jobs.controller.Jobs"
+            android:label="@string/title_activity_jobs"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

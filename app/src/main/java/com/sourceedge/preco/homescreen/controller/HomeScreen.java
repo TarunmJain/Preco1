@@ -32,6 +32,7 @@ import com.google.android.gms.common.api.Status;
 import com.sourceedge.preco.R;
 import com.sourceedge.preco.history.controller.History;
 import com.sourceedge.preco.homescreen.view.ServicesAdapter;
+import com.sourceedge.preco.jobs.controller.Jobs;
 import com.sourceedge.preco.login.controller.Login;
 import com.sourceedge.preco.payment.controller.AddPrecoPoints;
 import com.sourceedge.preco.support.Class_Genric;
@@ -44,7 +45,7 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
     DrawerLayout drawer;
     ActionBarDrawerToggle mDrawerToggle;
     CoordinatorLayout coordinatorLayout;
-    RelativeLayout addPointLayout, historyLayout;
+    RelativeLayout addPointLayout, historyLayout, jobsLayout;
     static Activity a;
     static SharedPreferences sharedPreferences;
     static Button button, button1;
@@ -75,7 +76,8 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
         Class_Genric.setupDrawer(toolbar, drawer, mDrawerToggle, HomeScreen.this);
         addPointLayout = (RelativeLayout) findViewById(R.id.addpointlay);
         historyLayout = (RelativeLayout) findViewById(R.id.historylay);
-        servicesRecyclerview=(RecyclerView)findViewById(R.id.services_recyclerview);
+        jobsLayout = (RelativeLayout) findViewById(R.id.jobslay);
+        servicesRecyclerview = (RecyclerView) findViewById(R.id.services_recyclerview);
 
         mGoogleApiClient = ((MyApplication) getApplication()).getGoogleApiClient(HomeScreen.this, this);
         OnClicks();
@@ -84,7 +86,7 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
     }
 
     public static void InitializeAdapter(Context context) {
-        servicesRecyclerview.setLayoutManager(new GridLayoutManager(context,2));
+        servicesRecyclerview.setLayoutManager(new GridLayoutManager(context, 2));
         servicesRecyclerview.setAdapter(new ServicesAdapter(context));
     }
 
@@ -181,6 +183,14 @@ public class HomeScreen extends AppCompatActivity implements GoogleApiClient.OnC
                 startActivity(new Intent(HomeScreen.this, History.class));
             }
         });
+
+        jobsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeScreen.this, Jobs.class));
+            }
+        });
+
     }
 
     public static void logout(final Context context) {
